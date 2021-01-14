@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 
-<project name="MyProject" default="jarfile">
+<project name="ac-defender" default="jarfile">
 
     <!-- Initialize build properties  -->
     <target name="init" description="Initializes properties">
-        <property name="project.name" value="MyProject" />
+        <property name="project.name" value="ac-defender" />
         <property name="src.dir" value="src" />
         <property name="main.class" value="org.academiadecodigo.koxtiposix.acdefender.Main" />
         <property name="build.dir" value="build" />
