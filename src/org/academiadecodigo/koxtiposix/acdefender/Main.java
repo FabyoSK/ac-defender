@@ -14,12 +14,28 @@ public class Main {
         rectangle.draw();
         rectangle.fill();
 
-        Enemy one = new Enemy(EnemyType.LACKEY);
-        one.draw();
+        Enemy[] enemies = new Enemy[10];
 
+        int x = 0;
         while (true) {
+            if(x % 10 == 0 && x < 100) {
+                for (int i = 0; i < enemies.length; i++) {
+                    if (enemies[i] == null) {
+                        System.out.println("Enemies made " + (i + 1));
+                        enemies[i] = new Enemy(EnemyType.LACKEY);
+                        enemies[i].draw();
+                        break;
+                    }
+                }
+            }
             Thread.sleep(250);
-            one.move();
+            for (int i = 0; i < enemies.length; i++) {
+                if(enemies[i] == null) {
+                    break;
+                }
+                enemies[i].move();
+            }
+            x++;
         }
         //Text text = new Text(270, 200, "Hello World");
         //text.draw();

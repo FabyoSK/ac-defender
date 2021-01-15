@@ -29,15 +29,12 @@ public enum EnemyType {
         switch(initialX) {
             case 0:
                 y = 134;
-                System.out.println(y);
                 break;
             case 1:
                 y = 234;
-                System.out.println(y);
                 break;
             default:
                 y = 334;
-                System.out.println(y);
                 break;
         }
 
