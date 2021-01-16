@@ -3,12 +3,17 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
+import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Line;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Main {
+
     public static void main(String[] args) throws InterruptedException {
 
         Rectangle background = new Rectangle(10, 10, 1200, 700);
@@ -24,9 +29,12 @@ public class Main {
         line1.draw();
         Line line2 = new Line(10, 510, 1200, 510);
         line2.draw();
-        Player player = new Player();
-        Enemy[] enemies = new Enemy[10];
+        List<Enemy> enemies = new LinkedList<>();
 
+
+        CollisionDetector detector = new CollisionDetector(enemies);
+
+        Player player = new Player(detector);
         Controls controls = new Controls();
         controls.setPlayer(player);
         controls.init();
@@ -34,21 +42,14 @@ public class Main {
         int x = 0;
         while (true) {
             if(x % 10 == 0 && x < 100) {
-                for (int i = 0; i < enemies.length; i++) {
-                    if (enemies[i] == null) {
-                        System.out.println("Enemies made " + (i + 1));
-                        enemies[i] = new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]);
-                        enemies[i].draw();
-                        break;
-                    }
-                }
+
+                 enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
             }
-            for (int i = 0; i < enemies.length; i++) {
-                if(enemies[i] == null) {
-                    break;
-                }
-                enemies[i].move();
+
+            for(Enemy enemy : enemies) {
+                enemy.move();
             }
+
             player.moveBullet();
             Thread.sleep(250);
             x++;
