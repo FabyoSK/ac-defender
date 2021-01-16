@@ -49,14 +49,10 @@ public class Main {
                 }
                 enemies[i].move();
             }
+            player.moveBullet();
             Thread.sleep(250);
             x++;
         }
-
-
-
-
-
 
 
     }

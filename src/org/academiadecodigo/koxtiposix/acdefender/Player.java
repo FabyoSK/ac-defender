@@ -1,5 +1,6 @@
 package org.academiadecodigo.koxtiposix.acdefender;
 
+import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Player {
@@ -7,15 +8,17 @@ public class Player {
     private int defaultPos;
     private Rectangle playerChar;
     private static final int PIXEL_JUMP = 200;
-    private int size = 32;
+    private static int size = 32;
     private int playerX = 200;
-    private int playerY = 410 - size/2;
+    private static int playerY = 410 - size/2;
     private int x = 0;
+    private Weapon weapon;
 
     public Player() {
         playerChar = new Rectangle(playerX, playerY, 32, 32);
         playerChar.draw();
         playerChar.fill();
+        weapon = new Weapon();
     }
 
 
@@ -33,5 +36,15 @@ public class Player {
             x--;
         }
 
+    }
+
+
+    public void shoot() {
+
+        weapon.shoot(playerChar.getY());
+    }
+
+    public void moveBullet() {
+        weapon.move();
     }
 }

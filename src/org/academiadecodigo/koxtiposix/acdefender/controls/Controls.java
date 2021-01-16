@@ -23,9 +23,13 @@ public class Controls implements KeyboardHandler {
         pressDown.setKey(KeyboardEvent.KEY_DOWN);
         pressDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent pressSpace = new KeyboardEvent();
+        pressSpace.setKey(KeyboardEvent.KEY_SPACE);
+        pressSpace.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
         keyboard.addEventListener(pressUp);
         keyboard.addEventListener(pressDown);
-
+        keyboard.addEventListener(pressSpace);
     }
 
     public void setPlayer(Player player) {
@@ -41,6 +45,9 @@ public class Controls implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_DOWN:
                 player.moveDown();
+                break;
+            case KeyboardEvent.KEY_SPACE:
+                player.shoot();
                 break;
         }
     }
