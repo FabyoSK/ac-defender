@@ -14,11 +14,11 @@ public class Player {
     private int x = 0;
     private Weapon weapon;
 
-    public Player() {
+    public Player(CollisionDetector detector) {
         playerChar = new Rectangle(playerX, playerY, 32, 32);
         playerChar.draw();
         playerChar.fill();
-        weapon = new Weapon();
+        weapon = new Weapon(detector);
     }
 
 
