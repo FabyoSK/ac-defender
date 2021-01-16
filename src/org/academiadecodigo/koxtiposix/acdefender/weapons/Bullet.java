@@ -27,7 +27,7 @@ public class Bullet {
             bullet.delete();
         }
         for(int i = 0; i < 50; i++) {
-            bullet.translate(50, 0);
+            bullet.translate(1, 0);
 
         }
     }
