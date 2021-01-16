@@ -1,6 +1,5 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
-import com.sun.beans.editors.ColorEditor;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public enum EnemyType {
