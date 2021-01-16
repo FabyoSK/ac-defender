@@ -37,6 +37,7 @@ public class Enemy {
         if(hp <= damage) {
             dead = true;
             hp = 0;
+            enemyChar.delete();
             return;
         }
 
