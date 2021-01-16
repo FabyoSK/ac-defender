@@ -22,19 +22,19 @@ public class Main {
                 for (int i = 0; i < enemies.length; i++) {
                     if (enemies[i] == null) {
                         System.out.println("Enemies made " + (i + 1));
-                        enemies[i] = new Enemy(EnemyType.LACKEY);
+                        enemies[i] = new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]);
                         enemies[i].draw();
                         break;
                     }
                 }
             }
-            Thread.sleep(250);
             for (int i = 0; i < enemies.length; i++) {
                 if(enemies[i] == null) {
                     break;
                 }
                 enemies[i].move();
             }
+            Thread.sleep(250);
             x++;
         }
         //Text text = new Text(270, 200, "Hello World");

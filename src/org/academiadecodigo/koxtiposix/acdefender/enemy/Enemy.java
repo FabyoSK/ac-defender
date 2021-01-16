@@ -8,12 +8,13 @@ public class Enemy {
     private Rectangle enemyChar;
     private boolean dead;
     private int speed;
-    private final int SIZE = 32;
+    private final int SIZE = 22;
 
     public Enemy(EnemyType enemyType) {
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
         this.enemyChar = new Rectangle(534, enemyType.initialY(), SIZE, SIZE);
+        this.enemyChar.setColor(enemyType.getColor());
         this.dead = false;
     }
 

@@ -1,8 +1,9 @@
 package org.academiadecodigo.koxtiposix.acdefender;
 
 public class Position {
+    private int z;
 
-    public Position(){
+    public Position() {
 
     }
 

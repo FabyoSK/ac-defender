@@ -1,16 +1,21 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
+import com.sun.beans.editors.ColorEditor;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+
 public enum EnemyType {
-    LACKEY(15, 3),
-    MIDDLE_BOSS(30, 2),
-    FINAL_BOSS(50, 1);
+    LACKEY(15, 3, Color.BLACK),
+    MIDDLE_BOSS(30, 2, Color.BLUE),
+    FINAL_BOSS(50, 1, Color.ORANGE);
 
     private int hp;
     private int speed;
+    private Color color;
 
-    EnemyType(int hp, int speed) {
+    EnemyType(int hp, int speed, Color color) {
         this.hp = hp;
         this.speed = speed;
+        this.color = color;
     }
 
     public int getHp() {
@@ -39,5 +44,9 @@ public enum EnemyType {
         }
 
         return y;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }
