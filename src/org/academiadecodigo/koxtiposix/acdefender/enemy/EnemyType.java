@@ -4,9 +4,10 @@ import com.sun.beans.editors.ColorEditor;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public enum EnemyType {
-    LACKEY(15, 3, Color.BLACK),
-    MIDDLE_BOSS(30, 2, Color.BLUE),
-    FINAL_BOSS(50, 1, Color.ORANGE);
+    LACKEY(15, 4, Color.BLACK),
+    MIDDLE_BOSS(30, 3, Color.BLUE),
+    FINAL_BOSS(50, 2, Color.ORANGE),
+    PCM(70, 1, Color.DARK_GRAY);
 
     private int hp;
     private int speed;
@@ -33,13 +34,13 @@ public enum EnemyType {
 
         switch(initialX) {
             case 0:
-                y = 134;
+                y = 210;
                 break;
             case 1:
-                y = 234;
+                y = 410;
                 break;
             default:
-                y = 334;
+                y = 610;
                 break;
         }
 

@@ -6,9 +6,10 @@ public class Player {
     private int key = 1;
     private int defaultPos;
     private Rectangle playerChar;
-    private int pixelJump = 100;
+    private static final int PIXEL_JUMP = 200;
+    private int size = 32;
     private int playerX = 200;
-    private int playerY = 400;
+    private int playerY = 410 - size/2;
     private int x = 0;
 
     public Player() {
@@ -20,7 +21,7 @@ public class Player {
 
     public void moveUp() {
         if (x != 1) {
-            playerChar.translate(0, -pixelJump);
+            playerChar.translate(0, -PIXEL_JUMP);
             x++;
         }
 
@@ -28,7 +29,7 @@ public class Player {
 
     public void moveDown() {
         if (x != -1) {
-            playerChar.translate(0, pixelJump);
+            playerChar.translate(0, PIXEL_JUMP);
             x--;
         }
 

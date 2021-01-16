@@ -13,7 +13,7 @@ public class Enemy {
     public Enemy(EnemyType enemyType) {
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
-        this.enemyChar = new Rectangle(534, enemyType.initialY(), SIZE, SIZE);
+        this.enemyChar = new Rectangle(1160, enemyType.initialY(), SIZE, SIZE);
         this.enemyChar.setColor(enemyType.getColor());
         this.dead = false;
     }
