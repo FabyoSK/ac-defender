@@ -8,19 +8,19 @@ public class Enemy {
     private Rectangle enemyChar;
     private boolean dead;
     private int speed;
-    private final int SIZE = 22;
+    private final int SIZE = 32;
 
     public Enemy(EnemyType enemyType) {
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
         this.enemyChar = new Rectangle(1160, enemyType.initialY(), SIZE, SIZE);
         this.enemyChar.setColor(enemyType.getColor());
+        enemyChar.fill();
         this.dead = false;
     }
 
     public void draw() {
 
-        enemyChar.fill();
     }
 
     public void move() {
@@ -32,15 +32,23 @@ public class Enemy {
         enemyChar.translate(-speed, 0);
     }
 
-    public void suffer(int damage) {
+    public void suffer() {
 
-        if(hp <= damage) {
+        hp--;
+        if(hp <= 0) {
             dead = true;
             hp = 0;
             enemyChar.delete();
+            System.out.println("Dead");
             return;
         }
+    }
 
-        hp -= damage;
+    public Rectangle getEnemyChar() {
+        return enemyChar;
+    }
+
+    public boolean isDead() {
+        return dead;
     }
 }

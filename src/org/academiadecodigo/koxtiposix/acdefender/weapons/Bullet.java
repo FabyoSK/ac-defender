@@ -15,7 +15,6 @@ public class Bullet {
     public Bullet(int damage, int positionY, CollisionDetector detector) {
         bullet = new Ellipse(233, positionY + 12, 8, 8);
         bullet.fill();
-        move();
         this.damage = damage;
         this.hit = false;
         this.detector = detector;
@@ -24,11 +23,22 @@ public class Bullet {
     public void move() {
 
         if(bullet.getX() >= 1150) {
+            System.out.println("Out of bounds");
             bullet.delete();
+            hit = true;
+            return;
         }
         for(int i = 0; i < 50; i++) {
             bullet.translate(1, 0);
-
+            if(detector.checkCollision(bullet)) {
+                hit = true;
+                bullet.delete();
+                return;
+            }
         }
+    }
+
+    public boolean isHit() {
+        return hit;
     }
 }

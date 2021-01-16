@@ -29,6 +29,7 @@ public class Main {
         line1.draw();
         Line line2 = new Line(10, 510, 1200, 510);
         line2.draw();
+
         List<Enemy> enemies = new LinkedList<>();
 
 
@@ -43,6 +44,7 @@ public class Main {
         while (true) {
             if(x % 10 == 0 && x < 100) {
 
+                System.out.println("new enemy should appear");
                  enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
             }
 

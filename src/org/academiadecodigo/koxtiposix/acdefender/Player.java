@@ -45,6 +45,6 @@ public class Player {
     }
 
     public void moveBullet() {
-        weapon.move();
+        weapon.moveBullet();
     }
 }

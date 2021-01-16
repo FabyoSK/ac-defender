@@ -3,10 +3,10 @@ package org.academiadecodigo.koxtiposix.acdefender.enemy;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public enum EnemyType {
-    LACKEY(15, 4, Color.BLACK),
-    MIDDLE_BOSS(30, 3, Color.BLUE),
-    FINAL_BOSS(50, 2, Color.ORANGE),
-    PCM(70, 1, Color.DARK_GRAY);
+    LACKEY(1, 4, Color.BLACK),
+    MIDDLE_BOSS(1, 3, Color.BLUE),
+    FINAL_BOSS(1, 2, Color.ORANGE),
+    PCM(1, 1, Color.DARK_GRAY);
 
     private int hp;
     private int speed;
@@ -28,18 +28,18 @@ public enum EnemyType {
 
     public int initialY() {
 
-        int initialX = (int) Math.floor(Math.random() * 3);
+        int initialY = (int) Math.floor(Math.random() * 3);
         int y;
 
-        switch(initialX) {
+        switch(initialY) {
             case 0:
-                y = 210;
+                y = 210 - 16;
                 break;
             case 1:
-                y = 410;
+                y = 410 - 16;
                 break;
             default:
-                y = 610;
+                y = 610 - 16;
                 break;
         }
 
