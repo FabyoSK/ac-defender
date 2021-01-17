@@ -4,28 +4,25 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Enemy {
 
-    private int hp;
-    private Rectangle enemyChar;
-    private boolean dead;
-    private int speed;
+    private final int DEFEND_LINE = 110;
     private final int SIZE = 32;
+    private int hp;
+    private int speed;
+    private boolean dead;
+    private Rectangle enemyChar;
 
     public Enemy(EnemyType enemyType) {
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
-        this.enemyChar = new Rectangle(1160, enemyType.initialY(), SIZE, SIZE);
+        this.enemyChar = new Rectangle(1160, enemyType.chooseRoad(), SIZE, SIZE);
         this.enemyChar.setColor(enemyType.getColor());
         enemyChar.fill();
         this.dead = false;
     }
 
-    public void draw() {
-
-    }
-
     public void move() {
 
-        if(enemyChar.getX() <= 110) {
+        if(enemyChar.getX() <= DEFEND_LINE) {
             //Implement what to do when reach mainChar area
             return;
         }

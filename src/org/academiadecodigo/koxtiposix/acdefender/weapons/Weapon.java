@@ -12,6 +12,7 @@ public class Weapon {
     private int shotsMade;
     private int damage;
     private CollisionDetector detector;
+    private static final int MAXSHOOTS = 1000;
 
     public Weapon(CollisionDetector detector) {
         bullets = new LinkedList<>();
@@ -21,11 +22,11 @@ public class Weapon {
         this.detector = detector;
     }
 
-    public void shoot(int playerY) {
-        if(shotsMade >= 1000) {
+    public void shoot(int playerPosition) {
+        if(shotsMade >= MAXSHOOTS) {
             return;
         }
-        bullets.add(new Bullet(damage, playerY, detector));
+        bullets.add(new Bullet(playerPosition, detector));
         shotsMade++;
     }
 

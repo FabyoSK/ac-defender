@@ -8,8 +8,8 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 public class Controls implements KeyboardHandler {
 
-    private Keyboard keyboard;
-    private Player player;
+    private Keyboard keyboard; // instancia de keyboard
+    private Player player; // instancia de player
 
     public void init() {
 
