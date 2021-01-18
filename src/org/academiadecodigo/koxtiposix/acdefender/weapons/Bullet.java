@@ -22,13 +22,13 @@ public class Bullet {
 
     public void move() {
 
-        if(bullet.getX() >= 1150) {
+        if(bullet.getX() >= 1180) {
             System.out.println("Out of bounds");
             bullet.delete();
             hit = true;
             return;
         }
-        for(int i = 0; i < 50; i++) {
+        for(int i = 0; i < 25; i++) {
             bullet.translate(1, 0);
             if(detector.checkCollision(bullet)) {
                 hit = true;

@@ -42,10 +42,10 @@ public class Main {
 
         int x = 0;
         while (true) {
-            if(x % 10 == 0 && x < 100) {
+            if(x % 10 == 0 && x < 1000) {
 
                 System.out.println("new enemy should appear");
-                 enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
+                enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
             }
 
             for(Enemy enemy : enemies) {
@@ -53,7 +53,7 @@ public class Main {
             }
 
             player.moveBullet();
-            Thread.sleep(250);
+            Thread.sleep(125);
             x++;
         }
 

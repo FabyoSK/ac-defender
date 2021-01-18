@@ -29,7 +29,7 @@ public class Enemy {
             //Implement what to do when reach mainChar area
             return;
         }
-        enemyChar.translate(-speed, 0);
+        enemyChar.translate(-speed * 2, 0);
     }
 
     public void suffer() {
