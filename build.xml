@@ -23,7 +23,7 @@
 
     <!-- Compiles the source code -->
     <target name="compile" description="Compiles the source code" depends="prepare">
-        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+        <javac source="1.8" target="1.8" srcdir="${src.dir}" destdir="${classes.dir}">
             <classpath refid="classpath"/>
         </javac>
     </target>
