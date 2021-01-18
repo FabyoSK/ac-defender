@@ -9,6 +9,8 @@ public class Enemy {
     private boolean dead;
     private int speed;
     private final int SIZE = 32;
+    private boolean line_crossed;
+
 
     public Enemy(EnemyType enemyType) {
         this.hp = enemyType.getHp();
@@ -17,6 +19,7 @@ public class Enemy {
         this.enemyChar.setColor(enemyType.getColor());
         enemyChar.fill();
         this.dead = false;
+        this.line_crossed = false;
     }
 
     public void draw() {
@@ -25,8 +28,9 @@ public class Enemy {
 
     public void move() {
 
-        if(enemyChar.getX() <= 110) {
+        if(enemyChar.getX() <= 210) {
             //Implement what to do when reach mainChar area
+            line_crossed = true;
             return;
         }
         enemyChar.translate(-speed, 0);
@@ -50,5 +54,13 @@ public class Enemy {
 
     public boolean isDead() {
         return dead;
+    }
+
+    public void setLine_crossed(boolean line_crossed) {
+        this.line_crossed = line_crossed;
+    }
+
+    public boolean isLine_crossed() {
+        return line_crossed;
     }
 }

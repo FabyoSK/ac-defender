@@ -3,6 +3,7 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Line;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -15,6 +16,7 @@ public class Game {
     CollisionDetector collisionDetector;
     Player player;
     Controls controls;
+    Canvas gameArea;
 
     public Game(){
         enemies = new LinkedList<>();
@@ -28,6 +30,7 @@ public class Game {
         background.setColor(Color.LIGHT_GRAY);
         background.draw();
         background.fill();
+
         Rectangle header = new Rectangle(10, 10, 1200, 100);
         header.setColor(Color.RED);
         header.draw();
@@ -41,6 +44,11 @@ public class Game {
         player = new Player(collisionDetector);
 
         controls.setPlayer(player);
+
+        if(!enemies.isEmpty())  {
+            enemies.removeAll(enemies);
+        }
+        
         controls.init();
 
     }
@@ -49,9 +57,10 @@ public class Game {
 
         int x = 0;
         while (true) {
-            if(x % 10 == 0 && x < 100) {
 
-                System.out.println("new enemy should appear");
+            if(x % 5 == 0 && x < 1000) {
+
+                //System.out.println("new enemy should appear");
                 enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
             }
 
@@ -60,8 +69,18 @@ public class Game {
             }
 
             player.moveBullet();
-            Thread.sleep(150);
+            Thread.sleep(50);
             x++;
+
+            for (Enemy enemy: enemies) {
+
+                if(enemy.isLine_crossed()){
+                    enemy.setLine_crossed(true);
+                    player.setX();
+                    init();
+
+                }
+            }
         }
 
     }

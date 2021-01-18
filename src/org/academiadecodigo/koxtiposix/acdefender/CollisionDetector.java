@@ -30,11 +30,11 @@ public class CollisionDetector {
                     bullet.getY() < enemies.get(i).getEnemyChar().getY() + enemies.get(i).getEnemyChar().getHeight() ) {
 
                 if(bullet.getX() + bullet.getWidth()  >= enemies.get(i).getEnemyChar().getX()) {
-                    System.out.println("Shoot");
+                    //System.out.println("Shoot");
                     enemies.get(i).suffer();
                     return true;
                 }
-                System.out.println("Close");
+                //System.out.println("Close");
             }
             //enemies.get(i).getEnemyChar().
         }
