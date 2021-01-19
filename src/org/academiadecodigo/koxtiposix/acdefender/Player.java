@@ -8,19 +8,21 @@ public class Player {
     private int defaultPos;
     private Rectangle playerChar;
     private static final int PIXEL_JUMP = 200;
-    private static int size = 32;
-    private int playerX = 200;
-    private static int playerY = 410 - size / 2;
+    private static int size = StaticParameter.PLAYER_SIZE;
+    private int playerX = StaticParameter.PLAYER_INIT_X;
+    private static int playerY = StaticParameter.PLAYER_INI_Y;
     private int x = 0;
     private Weapon weapon;
 
     public Player(CollisionDetector detector) {
-        playerChar = new Rectangle(playerX, playerY, 32, 32);
-        playerChar.draw();
-        playerChar.fill();
+        playerChar = new Rectangle(playerX, playerY, size, size);
         weapon = new Weapon(detector);
     }
 
+    public void draw() {
+        playerChar.draw();
+        playerChar.fill();
+    }
 
     public void moveUp() {
         if (x != 1) {
