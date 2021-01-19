@@ -6,7 +6,7 @@ import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 public class Bullet {
 
     private final int BULLET_LIMIT = 1150;
-    private final int BULLET_SPEED = 150;
+    private final int BULLET_SPEED = 50;
     private final int X_POSITION = 233;
     private final int WIDTH = 8;
     private final int HEIGHT = 8;

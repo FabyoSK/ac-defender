@@ -36,7 +36,7 @@ public class CollisionDetector {
                 }
                 System.out.println("Close");
             }
-            //enemies.get(i).getEnemyChar().
+
         }
 
         Iterator<Enemy> iterator = enemies.iterator();
