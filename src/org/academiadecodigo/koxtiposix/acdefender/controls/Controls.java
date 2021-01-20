@@ -49,11 +49,7 @@ public class Controls implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
-                try {
-                    player.shoot();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                player.shoot();
                 break;
         }
     }

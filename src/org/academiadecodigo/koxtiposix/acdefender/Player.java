@@ -5,7 +5,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Player {
 
-    private final Rectangle playerChar;
+    private Rectangle playerChar;
     private final Weapon weapon;
 
     private final int x = 0;
@@ -13,10 +13,13 @@ public class Player {
 
     public Player(CollisionDetector detector) {
 
+        weapon = new Weapon(detector);
+    }
+
+    public void draw(){
         playerChar = new Rectangle(Utils.PLAYER_X_POS, Utils.PLAYER_Y_POS, Utils.SIZE, Utils.SIZE);
         playerChar.draw();
         playerChar.fill();
-        weapon = new Weapon(detector);
     }
 
     public void moveUp() {

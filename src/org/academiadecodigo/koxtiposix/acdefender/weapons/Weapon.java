@@ -13,9 +13,7 @@ public class Weapon {
     private int damage;
     private int shotsMade;
 
-    private static final int MAXSHOOTS = 1000;
-    private CollisionDetector detector;
-    private static final int MAXSHOOTS = 8;
+    private static final int MAX_SHOOTS = 8;
 
     public Weapon(CollisionDetector detector) {
 
@@ -27,10 +25,10 @@ public class Weapon {
 
     }
 
-    public void shoot(int playerPosition) throws InterruptedException {
+
     public void shoot(int playerPosition) {
 
-        if(shotsMade >= MAXSHOOTS) {
+        if(shotsMade >= MAX_SHOOTS) {
             shotsMade = 0;
         }
         bullets.add(new Bullet(playerPosition, detector));

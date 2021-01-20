@@ -3,10 +3,7 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Line;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -77,7 +74,6 @@ public class Game {
                 if(enemy.isLine_crossed()){
 
                     enemy.setLine_crossed(true);
-                    player.setX();
                     x = 1001;
                     gameEnd();
                 }

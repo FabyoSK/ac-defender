@@ -1,5 +1,6 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
+import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Enemy {
