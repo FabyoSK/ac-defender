@@ -10,7 +10,9 @@ public class Enemy {
     private Rectangle enemyChar;
     private boolean dead;
     private int speed;
+    private final int SIZE = 32;
     private boolean line_crossed;
+
 
     public Enemy(EnemyType enemyType) {
         this.hp = enemyType.getHp();
@@ -44,7 +46,7 @@ public class Enemy {
             hp = 0;
             enemyChar.delete();
             System.out.println("Dead");
-
+            return;
         }
     }
 
