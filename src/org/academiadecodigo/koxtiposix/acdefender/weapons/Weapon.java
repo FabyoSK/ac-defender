@@ -58,4 +58,11 @@ public class Weapon {
         }
 
     }
+
+    public void eraseBullets() {
+        for(Bullet bullet : bullets) {
+            bullet.erase();
+        }
+        bullets.removeAll(bullets);
+    }
 }

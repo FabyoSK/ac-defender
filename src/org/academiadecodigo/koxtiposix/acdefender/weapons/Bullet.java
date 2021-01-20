@@ -46,4 +46,8 @@ public class Bullet {
     public boolean isHit() {
         return hit;
     }
+
+    public void erase() {
+        bullet.delete();
+    }
 }

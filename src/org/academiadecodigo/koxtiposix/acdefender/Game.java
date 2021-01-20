@@ -51,34 +51,52 @@ public class Game {
 
         int x = 0;
 
-        while (true) {
+        while(player.health() > 0) {
 
-            if(x % 5 == 0 && x < 1000) {
+            while (true) {
 
-                enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
+                if (x % 5 == 0 && x < 1000) {
 
-            }
+                    enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
 
-            for(Enemy enemy : enemies) {
+                }
 
-                enemy.move();
+                for (Enemy enemy : enemies) {
 
-            }
+                    enemy.move();
 
-            player.moveBullet();
-            Thread.sleep(50);
-            x++;
+                }
 
-            for (Enemy enemy: enemies) {
+                player.moveBullet();
+                Thread.sleep(50);
+                x++;
 
-                if(enemy.isLine_crossed()){
+                for (Enemy enemy : enemies) {
 
-                    enemy.setLine_crossed(true);
-                    x = 1001;
-                    gameEnd();
+                    if (enemy.isLine_crossed()) {
+
+                        enemy.setLine_crossed(true);
+                        player.takeKey();
+                        x = 1001;
+                        break;
+                        //gameEnd();
+                    }
+                }
+
+                if(x == 1001) {
+                    x = 0;
+                    for(Enemy enemy : enemies) {
+                        enemy.erase();
+                    }
+                    enemies.removeAll(enemies);
+                    player.eraseBullets();
+                    Thread.sleep(700);
+                    System.out.println("Player HP: " + player.health());
+                    break;
                 }
             }
         }
+        gameEnd();
 
     }
     private void gameEnd(){

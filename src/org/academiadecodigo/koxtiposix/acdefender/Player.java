@@ -9,13 +9,14 @@ public class Player {
 
     private Rectangle playerChar;
     private final Weapon weapon;
-
+    private int health;
     private final int x = 0;
 
 
     public Player(CollisionDetector detector) {
 
         weapon = new Weapon(detector);
+        health = 3;
     }
 
     public void draw(){
@@ -55,5 +56,17 @@ public class Player {
             e.getMessage();
         }
 
+    }
+
+    public void takeKey() {
+        health--;
+    }
+
+    public int health() {
+        return health;
+    }
+
+    public void eraseBullets() {
+        weapon.eraseBullets();
     }
 }
