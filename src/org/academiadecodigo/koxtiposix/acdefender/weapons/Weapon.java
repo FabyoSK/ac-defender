@@ -58,11 +58,19 @@ public class Weapon {
         }
 
     }
+<<<<<<< HEAD
 
     public void eraseBullets() {
         for(Bullet bullet : bullets) {
             bullet.erase();
         }
         bullets.removeAll(bullets);
+=======
+    public int getShotsMade(){
+        return shotsMade;
+    }
+    public static int getMaxShoots(){
+        return MAX_SHOOTS;
+>>>>>>> 344cc384c7dbcb5ba6e26d965c760c30835cc597
     }
 }

@@ -2,12 +2,13 @@ package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Enemy {
 
 
     private int hp;
-    private final Rectangle enemyChar;
+    private final Picture enemyChar;
     private boolean dead;
     private final int speed;
     private boolean line_crossed;
@@ -17,9 +18,8 @@ public class Enemy {
 
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
-        this.enemyChar = new Rectangle(1160, enemyType.chooseRoad(), Utils.SIZE, Utils.SIZE);
-        this.enemyChar.setColor(enemyType.getColor());
-        enemyChar.fill();
+        this.enemyChar = new Picture(1160, enemyType.chooseRoad(),"resource/baseenemy.png" );
+        this.enemyChar.draw();
         this.dead = false;
         this.line_crossed = false;
 
@@ -48,7 +48,7 @@ public class Enemy {
         }
     }
 
-    public Rectangle getEnemyChar() {
+    public Picture getEnemyChar() {
         return enemyChar;
     }
 
