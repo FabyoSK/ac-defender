@@ -59,7 +59,6 @@ public class Player {
         }
 
     }
-<<<<<<< HEAD
 
     public void takeKey() {
         health--;
@@ -71,12 +70,11 @@ public class Player {
 
     public void eraseBullets() {
         weapon.eraseBullets();
-=======
+    }
     public int getShotsMade(){
         return weapon.getShotsMade();
     }
     public static int getMaxShoots(){
         return Weapon.getMaxShoots();
->>>>>>> 344cc384c7dbcb5ba6e26d965c760c30835cc597
     }
 }

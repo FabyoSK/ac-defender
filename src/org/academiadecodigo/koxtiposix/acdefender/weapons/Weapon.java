@@ -28,7 +28,7 @@ public class Weapon {
 
     public void shoot(int playerPosition) {
 
-        if(shotsMade >= MAX_SHOOTS) {
+        if (shotsMade >= MAX_SHOOTS) {
             shotsMade = 0;
         }
         bullets.add(new Bullet(playerPosition, detector));
@@ -40,7 +40,7 @@ public class Weapon {
 
         for (Bullet bullet : bullets) {
 
-            if(bullet != null) {
+            if (bullet != null) {
                 bullet.move();
             }
 
@@ -51,26 +51,26 @@ public class Weapon {
 
         while (iterator.hasNext()) {
 
-            if(iterator.next().isHit()) {
+            if (iterator.next().isHit()) {
                 iterator.remove();
             }
 
         }
 
     }
-<<<<<<< HEAD
 
     public void eraseBullets() {
-        for(Bullet bullet : bullets) {
+        for (Bullet bullet : bullets) {
             bullet.erase();
         }
         bullets.removeAll(bullets);
-=======
-    public int getShotsMade(){
+    }
+
+    public int getShotsMade() {
         return shotsMade;
     }
-    public static int getMaxShoots(){
+
+    public static int getMaxShoots() {
         return MAX_SHOOTS;
->>>>>>> 344cc384c7dbcb5ba6e26d965c760c30835cc597
     }
 }

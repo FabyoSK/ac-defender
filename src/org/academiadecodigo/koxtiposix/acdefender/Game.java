@@ -53,33 +53,21 @@ public class Game {
 
         int x = 0;
 
-<<<<<<< HEAD
-        while(player.health() > 0) {
+        while (player.health() > 0) {
 
             while (true) {
-=======
-        while (true) {
-            hud();
-            if (x % 5 == 0 && x < 1000) {
->>>>>>> 344cc384c7dbcb5ba6e26d965c760c30835cc597
-
+                hud();
                 if (x % 5 == 0 && x < 1000) {
 
                     enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
 
-<<<<<<< HEAD
                 }
-=======
-            for (Enemy enemy : enemies) {
->>>>>>> 344cc384c7dbcb5ba6e26d965c760c30835cc597
-
                 for (Enemy enemy : enemies) {
 
                     enemy.move();
 
                 }
 
-<<<<<<< HEAD
                 player.moveBullet();
                 Thread.sleep(50);
                 x++;
@@ -95,15 +83,10 @@ public class Game {
                         //gameEnd();
                     }
                 }
-=======
-            for (Enemy enemy : enemies) {
 
-                if (enemy.isLine_crossed()) {
->>>>>>> 344cc384c7dbcb5ba6e26d965c760c30835cc597
-
-                if(x == 1001) {
+                if (x == 1001) {
                     x = 0;
-                    for(Enemy enemy : enemies) {
+                    for (Enemy enemy : enemies) {
                         enemy.erase();
                     }
                     enemies.removeAll(enemies);
@@ -114,10 +97,11 @@ public class Game {
                 }
             }
 
+
         }
         gameEnd();
-
     }
+
 
     private void gameEnd() {
         if (!enemies.isEmpty()) {
