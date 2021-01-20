@@ -2,24 +2,25 @@ package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public enum EnemyType {
-    LACKEY(2, 4, Color.BLACK),
-    MIDDLE_BOSS(5, 3, Color.BLUE),
-    FINAL_BOSS(7, 2, Color.ORANGE),
-    PCM(10, 1, Color.RED);
+    LACKEY(2, 4, "resources/Screen_Shot_2021-01-20_at_16.43.20-removebg-preview (2).png"),
+    MIDDLE_BOSS(5, 3, "resources/Screen_Shot_2021-01-20_at_16.43.20-removebg-preview (2).png"),
+    FINAL_BOSS(7, 2, "resources/soldier2 (1).png"),
+    PCM(10, 1, "resources/soldier2 (1).png");
 
     private final int ROAD_ONE = 194;
     private final int ROAD_TWO = 394;
     private final int ROAD_THREE = 594;
     private int hp;
     private int speed;
-    private Color color;
+    private String src;
 
-    EnemyType(int hp, int speed, Color color) {
+    EnemyType(int hp, int speed, String src) {
         this.hp = hp;
         this.speed = speed;
-        this.color = color;
+        this.src = src;
     }
 
     public int getHp() {
@@ -50,7 +51,7 @@ public enum EnemyType {
         return chooseRoad;
     }
 
-    public Color getColor() {
-        return color;
+    public String getSrc() {
+        return src;
     }
 }
