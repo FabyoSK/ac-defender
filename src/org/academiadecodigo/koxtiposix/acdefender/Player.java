@@ -19,6 +19,7 @@ public class Player {
     private final Weapon weapon;
     private int health;
     private final int x = 0;
+    String teletransportAudioFile = "resources/audio/dbz-teleport.wav";
 
 
     public Player(CollisionDetector detector) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -33,16 +34,18 @@ public class Player {
         playerChar.draw();
     }
 
-    public void moveUp() {
+    public void moveUp() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         if (Utils.X_POS != 1) {
             playerChar.translate(0, -Utils.JUMP_SIZE);
             Utils.X_POS++;
         }
         System.out.println(Utils.X_POS);
+
+        new Audio(teletransportAudioFile).play();
     }
 
-    public void moveDown() {
+    public void moveDown() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         if (Utils.X_POS != -1) {
             playerChar.translate(0, Utils.JUMP_SIZE);
@@ -50,6 +53,7 @@ public class Player {
         }
         System.out.println(Utils.X_POS);
 
+        new Audio(teletransportAudioFile).play();
     }
 
     public void shoot() throws UnsupportedAudioFileException, IOException, LineUnavailableException {

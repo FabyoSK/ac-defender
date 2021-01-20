@@ -1,5 +1,6 @@
 package org.academiadecodigo.koxtiposix.acdefender;
 
+import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
@@ -21,7 +22,10 @@ public class Game {
     Text bulletsCount;
     Text life_Number;
 
-    public Game() {
+    private String BGMAudioFile = "resources/audio/bgm.wav";
+    Audio BGM = new Audio(BGMAudioFile);
+
+    public Game() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
@@ -51,8 +55,8 @@ public class Game {
 
     }
 
-    public void start() throws InterruptedException {
-
+    public void start() throws InterruptedException, IOException, LineUnavailableException, UnsupportedAudioFileException {
+        BGM.play();
         int x = 0;
 
         while (player.health() > 0) {
@@ -103,17 +107,21 @@ public class Game {
 
 
         }
+        BGM.stop();
         gameEnd();
     }
 
 
-    private void gameEnd() {
+    private void gameEnd() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         if (!enemies.isEmpty()) {
             enemies.removeAll(enemies);
         }
 
-        Picture background = new Picture(10, 10,"resources/gameover.png");
+        Picture background = new Picture(10, 10, "resources/gameover.png");
         background.draw();
+
+        String GameOverAudioFile = "resources/audio/gameover.wav";
+        new Audio(GameOverAudioFile).play();
     }
 
     private void bulletsHud() {

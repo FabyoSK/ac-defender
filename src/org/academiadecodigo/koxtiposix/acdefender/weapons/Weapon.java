@@ -40,8 +40,7 @@ public class Weapon {
         }
         bullets.add(new Bullet(playerPosition, detector));
         shotsMade++;
-        Audio shotAudio = new Audio(shootAudioFile);
-        shotAudio.play();
+        new Audio(shootAudioFile).play();
     }
 
     public void moveBullet() {
