@@ -2,6 +2,7 @@ package org.academiadecodigo.koxtiposix.acdefender.weapons;
 
 import org.academiadecodigo.koxtiposix.acdefender.CollisionDetector;
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 
 public class Bullet {
@@ -12,7 +13,8 @@ public class Bullet {
 
     public Bullet(int BULLET_Y_POS, CollisionDetector detector) {
 
-        bullet = new Ellipse(Utils.BULLET_X_POS, BULLET_Y_POS + 12, Utils.BULLET_WIDTH, Utils.BULLET_HEIGHT);
+        bullet = new Ellipse(Utils.BULLET_X_POS, BULLET_Y_POS + 72, Utils.BULLET_WIDTH, Utils.BULLET_HEIGHT);
+        bullet.setColor(Color.YELLOW);
         bullet.fill();
         this.hit = false;
         this.detector = detector;

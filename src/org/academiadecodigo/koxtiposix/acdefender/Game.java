@@ -3,8 +3,6 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
-import org.academiadecodigo.koxtiposix.acdefender.weapons.Bullet;
-import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -18,6 +16,7 @@ public class Game {
     Player player;
     Controls controls;
     Text bulletsCount;
+    Text life_Number;
 
     public Game() {
 
@@ -56,7 +55,8 @@ public class Game {
         while (player.health() > 0) {
 
             while (true) {
-                hud();
+                bulletsHud();
+                lifeHud();
                 if (x % 5 == 0 && x < 1000) {
 
                     enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
@@ -88,6 +88,7 @@ public class Game {
                     x = 0;
                     for (Enemy enemy : enemies) {
                         enemy.erase();
+
                     }
                     enemies.removeAll(enemies);
                     player.eraseBullets();
@@ -108,21 +109,23 @@ public class Game {
             enemies.removeAll(enemies);
         }
 
-        Rectangle background = new Rectangle(10, 10, 1200, 700);
-        background.setColor(Color.BLACK);
+        Picture background = new Picture(10, 10,"resources/gameover.png");
         background.draw();
-        background.fill();
-
-        Text text = new Text(600, 300, "Game Over MotherFucker");
-        text.setColor(Color.WHITE);
-        text.draw();
     }
 
-    private void hud() {
+    private void bulletsHud() {
         if (bulletsCount != null) {
             bulletsCount.delete();
         }
         bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
         bulletsCount.draw();
+    }
+
+    public void lifeHud() {
+        if (life_Number != null) {
+            life_Number.delete();
+        }
+        life_Number = new Text(150, 50, "key: " + player.health());
+        life_Number.draw();
     }
 }
