@@ -1,5 +1,6 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
+import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public enum EnemyType {
@@ -36,13 +37,13 @@ public enum EnemyType {
 
         switch(randomRoadPos) {
             case 0:
-                chooseRoad = ROAD_ONE;
+                chooseRoad = Utils.ROAD_ONE;
                 break;
             case 1:
-                chooseRoad = ROAD_TWO;
+                chooseRoad = Utils.ROAD_TWO;
                 break;
             default:
-                chooseRoad = ROAD_THREE;
+                chooseRoad = Utils.ROAD_THREE;
                 break;
         }
 
