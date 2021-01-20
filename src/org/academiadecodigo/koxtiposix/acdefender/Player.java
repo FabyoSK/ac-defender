@@ -1,6 +1,7 @@
 package org.academiadecodigo.koxtiposix.acdefender;
 
 import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 import java.util.ConcurrentModificationException;
@@ -21,6 +22,7 @@ public class Player {
     public void draw(){
         playerChar = new Rectangle(Utils.PLAYER_X_POS, Utils.PLAYER_Y_POS, Utils.SIZE, Utils.SIZE);
         playerChar.draw();
+        playerChar.setColor(Color.WHITE);
         playerChar.fill();
     }
 
@@ -55,5 +57,11 @@ public class Player {
             e.getMessage();
         }
 
+    }
+    public int getShotsMade(){
+        return weapon.getShotsMade();
+    }
+    public static int getMaxShoots(){
+        return Weapon.getMaxShoots();
     }
 }

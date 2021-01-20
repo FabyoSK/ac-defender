@@ -58,4 +58,10 @@ public class Weapon {
         }
 
     }
+    public int getShotsMade(){
+        return shotsMade;
+    }
+    public static int getMaxShoots(){
+        return MAX_SHOOTS;
+    }
 }

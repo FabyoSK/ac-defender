@@ -3,7 +3,10 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
+import org.academiadecodigo.koxtiposix.acdefender.weapons.Bullet;
+import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.*;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,8 +17,9 @@ public class Game {
     CollisionDetector collisionDetector;
     Player player;
     Controls controls;
+    Text bulletsCount;
 
-    public Game(){
+    public Game() {
 
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
@@ -23,15 +27,13 @@ public class Game {
 
     }
 
-    public void init(){
+    public void init() {
 
-        Rectangle background = new Rectangle(Utils.PADDING, Utils.PADDING, Utils.GAME_WIDTH, Utils.GAME_HEIGHT);
-        background.setColor(Color.LIGHT_GRAY);
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resource/bg.jpg");
         background.draw();
-        background.fill();
 
         Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);
-        header.setColor(Color.RED);
+        header.setColor(Color.GRAY);
         header.draw();
         header.fill();
 
@@ -52,14 +54,14 @@ public class Game {
         int x = 0;
 
         while (true) {
-
-            if(x % 5 == 0 && x < 1000) {
+            hud();
+            if (x % 5 == 0 && x < 1000) {
 
                 enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
 
             }
 
-            for(Enemy enemy : enemies) {
+            for (Enemy enemy : enemies) {
 
                 enemy.move();
 
@@ -69,19 +71,21 @@ public class Game {
             Thread.sleep(50);
             x++;
 
-            for (Enemy enemy: enemies) {
+            for (Enemy enemy : enemies) {
 
-                if(enemy.isLine_crossed()){
+                if (enemy.isLine_crossed()) {
 
                     enemy.setLine_crossed(true);
                     x = 1001;
                     gameEnd();
                 }
             }
+
         }
 
     }
-    private void gameEnd(){
+
+    private void gameEnd() {
         if (!enemies.isEmpty()) {
             enemies.removeAll(enemies);
         }
@@ -94,5 +98,13 @@ public class Game {
         Text text = new Text(600, 300, "Game Over MotherFucker");
         text.setColor(Color.WHITE);
         text.draw();
+    }
+
+    private void hud() {
+        if (bulletsCount != null) {
+            bulletsCount.delete();
+        }
+        bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
+        bulletsCount.draw();
     }
 }
