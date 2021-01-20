@@ -9,34 +9,35 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
+
     List<Enemy> enemies;
     CollisionDetector collisionDetector;
     Player player;
     Controls controls;
-    Canvas gameArea;
-    int n = 0;
 
     public Game(){
+
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
         controls = new Controls();
+
     }
 
+    public void init(){
 
-    public void init() {
-        Rectangle background = new Rectangle(10, 10, 1200, 700);
+        Rectangle background = new Rectangle(Utils.PADDING, Utils.PADDING, Utils.GAME_WIDTH, Utils.GAME_HEIGHT);
         background.setColor(Color.LIGHT_GRAY);
         background.draw();
         background.fill();
 
-        Rectangle header = new Rectangle(10, 10, 1200, 100);
+        Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);
         header.setColor(Color.RED);
         header.draw();
         header.fill();
 
-        Line line1 = new Line(10, 310, 1200, 310);
+        Line line1 = new Line(Utils.PADDING, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
         line1.draw();
-        Line line2 = new Line(10, 510, 1200, 510);
+        Line line2 = new Line(Utils.PADDING, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
         line2.draw();
 
         player = new Player(collisionDetector);
@@ -49,16 +50,19 @@ public class Game {
     public void start() throws InterruptedException {
 
         int x = 0;
+
         while (true) {
 
             if(x % 5 == 0 && x < 1000) {
 
-                //System.out.println("new enemy should appear");
                 enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
+
             }
 
             for(Enemy enemy : enemies) {
+
                 enemy.move();
+
             }
 
             player.moveBullet();
@@ -68,8 +72,8 @@ public class Game {
             for (Enemy enemy: enemies) {
 
                 if(enemy.isLine_crossed()){
+
                     enemy.setLine_crossed(true);
-                    player.setX();
                     x = 1001;
                     gameEnd();
                 }
