@@ -47,6 +47,7 @@ public class Game {
 
         if(!enemies.isEmpty())  {
             enemies.removeAll(enemies);
+
         }
         
         controls.init();
@@ -76,7 +77,7 @@ public class Game {
 
                 if(enemy.isLine_crossed()){
                     enemy.setLine_crossed(true);
-                    player.setX();
+                    //player.setX();
                     init();
 
                 }
