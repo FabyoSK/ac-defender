@@ -3,52 +3,47 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Line;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.*;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
+
     List<Enemy> enemies;
     CollisionDetector collisionDetector;
     Player player;
     Controls controls;
-    Canvas gameArea;
+    Text bulletsCount;
+    Text life_Number;
 
-    public Game(){
+    public Game() {
+
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
         controls = new Controls();
+
     }
 
+    public void init() {
 
-    public void init(){
-        Rectangle background = new Rectangle(10, 10, 1200, 700);
-        background.setColor(Color.LIGHT_GRAY);
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resource/bg.jpg");
         background.draw();
-        background.fill();
 
-        Rectangle header = new Rectangle(10, 10, 1200, 100);
-        header.setColor(Color.RED);
+        Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);
+        header.setColor(Color.GRAY);
         header.draw();
         header.fill();
 
-        Line line1 = new Line(10, 310, 1200, 310);
+        Line line1 = new Line(Utils.PADDING, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
         line1.draw();
-        Line line2 = new Line(10, 510, 1200, 510);
+        Line line2 = new Line(Utils.PADDING, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
         line2.draw();
 
         player = new Player(collisionDetector);
-
+        player.draw();
         controls.setPlayer(player);
-
-        if(!enemies.isEmpty())  {
-            enemies.removeAll(enemies);
-        }
-        
         controls.init();
 
     }
@@ -56,32 +51,81 @@ public class Game {
     public void start() throws InterruptedException {
 
         int x = 0;
-        while (true) {
 
-            if(x % 5 == 0 && x < 1000) {
+        while (player.health() > 0) {
 
-                //System.out.println("new enemy should appear");
-                enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
-            }
+            while (true) {
+                bulletsHud();
+                lifeHud();
+                if (x % 5 == 0 && x < 1000) {
 
-            for(Enemy enemy : enemies) {
-                enemy.move();
-            }
-
-            player.moveBullet();
-            Thread.sleep(50);
-            x++;
-
-            for (Enemy enemy: enemies) {
-
-                if(enemy.isLine_crossed()){
-                    enemy.setLine_crossed(true);
-                    player.setX();
-                    init();
+                    enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
 
                 }
+                for (Enemy enemy : enemies) {
+
+                    enemy.move();
+
+                }
+
+                player.moveBullet();
+                Thread.sleep(50);
+                x++;
+
+                for (Enemy enemy : enemies) {
+
+                    if (enemy.isLine_crossed()) {
+
+                        enemy.setLine_crossed(true);
+                        player.takeKey();
+                        x = 1001;
+                        break;
+                        //gameEnd();
+                    }
+                }
+
+                if (x == 1001) {
+                    x = 0;
+                    for (Enemy enemy : enemies) {
+                        enemy.erase();
+
+                    }
+                    enemies.removeAll(enemies);
+                    player.eraseBullets();
+                    Thread.sleep(700);
+                    System.out.println("Player HP: " + player.health());
+                    break;
+                }
             }
+
+
+        }
+        gameEnd();
+    }
+
+
+    private void gameEnd() {
+        if (!enemies.isEmpty()) {
+            enemies.removeAll(enemies);
         }
 
+        Picture background = new Picture(10, 10,"resources/gameover.png");
+        background.draw();
+    }
+
+    private void bulletsHud() {
+        if (bulletsCount != null) {
+            bulletsCount.delete();
+        }
+        bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
+        bulletsCount.draw();
+    }
+
+    public void lifeHud() {
+        if (life_Number != null) {
+            life_Number.delete();
+        }
+        life_Number = new Text(150, 50, "key: " + player.health());
+        life_Number.draw();
     }
 }

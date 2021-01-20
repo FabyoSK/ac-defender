@@ -1,44 +1,54 @@
 package org.academiadecodigo.koxtiposix.acdefender.weapons;
 
 import org.academiadecodigo.koxtiposix.acdefender.CollisionDetector;
+import org.academiadecodigo.koxtiposix.acdefender.Utils;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Bullet {
 
-    private int damage;
-    private Ellipse bullet;
-    private int size = 8;
     private boolean hit;
-    private CollisionDetector detector;
+    private final Ellipse bullet;
+    private final CollisionDetector detector;
 
-    public Bullet(int damage, int positionY, CollisionDetector detector) {
-        bullet = new Ellipse(233, positionY + 12, 8, 8);
+    public Bullet(int BULLET_Y_POS, CollisionDetector detector) {
+
+        bullet = new Ellipse(Utils.BULLET_X_POS, BULLET_Y_POS + 72, Utils.BULLET_WIDTH, Utils.BULLET_HEIGHT);
+        bullet.setColor(Color.YELLOW);
         bullet.fill();
-        this.damage = damage;
         this.hit = false;
         this.detector = detector;
+
     }
 
     public void move() {
 
-        if(bullet.getX() >= 1150) {
-            System.out.println("Out of bounds");
+        if (bullet.getX() >= Utils.BULLET_LIMIT) {
+
             bullet.delete();
             hit = true;
             return;
+
         }
-        for(int i = 0; i < 50; i++) {
+
+        for (int i = 0; i < Utils.BULLET_SPEED; i++) {
+
             bullet.translate(1, 0);
-            if(detector.checkCollision(bullet)) {
+
+            if (detector.checkCollision(bullet)) {
+
                 hit = true;
                 bullet.delete();
                 return;
+
             }
-        }
-    }
+        }}
 
     public boolean isHit() {
         return hit;
+    }
+
+    public void erase() {
+        bullet.delete();
     }
 }

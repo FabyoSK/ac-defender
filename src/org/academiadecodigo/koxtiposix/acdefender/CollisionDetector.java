@@ -27,7 +27,7 @@ public class CollisionDetector {
         for(int i = 0; i < enemies.size(); i++) {
 
             if(bullet.getY() > enemies.get(i).getEnemyChar().getY() &&
-                    bullet.getY() < enemies.get(i).getEnemyChar().getY() + enemies.get(i).getEnemyChar().getHeight() ) {
+               bullet.getY() < enemies.get(i).getEnemyChar().getY() + enemies.get(i).getEnemyChar().getHeight() ) {
 
                 if(bullet.getX() + bullet.getWidth()  >= enemies.get(i).getEnemyChar().getX()) {
                     //System.out.println("Shoot");
@@ -36,7 +36,7 @@ public class CollisionDetector {
                 }
                 //System.out.println("Close");
             }
-            //enemies.get(i).getEnemyChar().
+
         }
 
         Iterator<Enemy> iterator = enemies.iterator();
