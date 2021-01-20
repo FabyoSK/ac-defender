@@ -6,6 +6,10 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Controls implements KeyboardHandler {
 
     private Player player;
@@ -49,7 +53,15 @@ public class Controls implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_SPACE:
-                player.shoot();
+                try {
+                    player.shoot();
+                } catch (UnsupportedAudioFileException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
