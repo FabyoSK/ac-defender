@@ -48,7 +48,6 @@ public class Enemy {
             hp = 0;
             enemyChar.delete();
             System.out.println("Dead");
-            return;
         }
     }
 
