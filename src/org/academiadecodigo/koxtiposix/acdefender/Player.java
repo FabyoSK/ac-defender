@@ -3,6 +3,8 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
+import java.util.ConcurrentModificationException;
+
 public class Player {
     private int key = 3;
     private int defaultPos;
@@ -52,7 +54,11 @@ public class Player {
     }
 
     public void moveBullet() {
-        weapon.moveBullet();
+        try {
+            weapon.moveBullet();
+        }catch (ConcurrentModificationException e){
+            e.getMessage();
+        }
 
     }
 }
