@@ -6,6 +6,7 @@ import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
 import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Game {
 
     public void init() {
 
-        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resource/bg.jpg");
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/bg.jpg");
         background.draw();
 
         Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);
@@ -115,7 +116,13 @@ public class Game {
 
     private void bulletsHud() {
         if (bulletsCount != null) {
-            bulletsCount.delete();
+            try {
+                bulletsCount.delete();
+
+            }catch (ConcurrentModificationException e){
+                e.getMessage();
+            }
+
         }
         bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
         bulletsCount.draw();

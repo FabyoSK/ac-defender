@@ -4,6 +4,8 @@ import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ConcurrentModificationException;
+
 public class Enemy {
 
 
@@ -18,7 +20,7 @@ public class Enemy {
 
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
-        this.enemyChar = new Picture(1160, enemyType.chooseRoad(),"resource/baseenemy.png" );
+        this.enemyChar = new Picture(1160, enemyType.chooseRoad(),"resources/baseenemy.png" );
         this.enemyChar.draw();
         this.dead = false;
         this.line_crossed = false;
@@ -33,7 +35,13 @@ public class Enemy {
             return;
 
         }
-        enemyChar.translate(-speed, 0);
+
+        try {
+            enemyChar.translate(-speed, 0);
+        }catch (ConcurrentModificationException e){
+            e.getMessage();
+        }
+
     }
 
     public void suffer() {
