@@ -10,16 +10,16 @@ public class Enemy {
     private Rectangle enemyChar;
     private boolean dead;
     private int speed;
-    private final int SIZE = 32;
+    //private final int SIZE = 32;
     private boolean line_crossed;
 
-    private boolean dead;
-    private Rectangle enemyChar;
+    //private boolean dead;
+    //private Rectangle enemyChar;
 
     public Enemy(EnemyType enemyType) {
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
-        this.enemyChar = new Rectangle(1160, enemyType.initialY(), SIZE, SIZE);
+        this.enemyChar = new Rectangle(1160, enemyType.chooseRoad(), SIZE, SIZE);
         this.enemyChar.setColor(enemyType.getColor());
         enemyChar.fill();
         this.dead = false;

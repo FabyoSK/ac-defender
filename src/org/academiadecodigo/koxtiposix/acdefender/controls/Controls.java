@@ -47,7 +47,11 @@ public class Controls implements KeyboardHandler {
                 player.moveDown();
                 break;
             case KeyboardEvent.KEY_SPACE:
-                player.shoot();
+                try {
+                    player.shoot();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }

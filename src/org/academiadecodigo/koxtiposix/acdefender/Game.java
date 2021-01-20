@@ -3,10 +3,7 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Line;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,15 +14,16 @@ public class Game {
     Player player;
     Controls controls;
     Canvas gameArea;
+    int n = 0;
 
-    public Game(){
+    public Game() {
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
         controls = new Controls();
     }
 
 
-    public void init(){
+    public void init() {
         Rectangle background = new Rectangle(10, 10, 1200, 700);
         background.setColor(Color.LIGHT_GRAY);
         background.draw();
@@ -42,14 +40,12 @@ public class Game {
         line2.draw();
 
         player = new Player(collisionDetector);
-
         controls.setPlayer(player);
+        controls.init();
 
-        if(!enemies.isEmpty())  {
+        if (!enemies.isEmpty()) {
             enemies.removeAll(enemies);
         }
-        
-        controls.init();
 
     }
 
@@ -58,13 +54,13 @@ public class Game {
         int x = 0;
         while (true) {
 
-            if(x % 5 == 0 && x < 1000) {
+            if (x % 5 == 0 && x < 1000) {
 
                 //System.out.println("new enemy should appear");
                 enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
             }
 
-            for(Enemy enemy : enemies) {
+            for (Enemy enemy : enemies) {
                 enemy.move();
             }
 
@@ -72,16 +68,30 @@ public class Game {
             Thread.sleep(50);
             x++;
 
-            for (Enemy enemy: enemies) {
+            for (Enemy enemy : enemies) {
 
-                if(enemy.isLine_crossed()){
+                if (enemy.isLine_crossed()) {
                     enemy.setLine_crossed(true);
                     player.setX();
-                    init();
-
+                    x = 1001;
+                    gameEnd();
                 }
             }
         }
 
+    }
+    private void gameEnd(){
+        if (!enemies.isEmpty()) {
+            enemies.removeAll(enemies);
+        }
+
+        Rectangle background = new Rectangle(10, 10, 1200, 700);
+        background.setColor(Color.BLACK);
+        background.draw();
+        background.fill();
+
+        Text text = new Text(600, 300, "Game Over MotherFucker");
+        text.setColor(Color.WHITE);
+        text.draw();
     }
 }
