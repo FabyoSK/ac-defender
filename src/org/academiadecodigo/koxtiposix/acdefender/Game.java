@@ -17,21 +17,26 @@ public class Game {
     Player player;
     Controls controls;
     Canvas gameArea;
+    Rectangle background;
+    Rectangle header;
 
     public Game(){
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
         controls = new Controls();
+        background = new Rectangle(10, 10, 1200, 700);
+        header = new Rectangle(10, 10, 1200, 100);
+        player = new Player(collisionDetector);
     }
 
 
     public void init(){
-        Rectangle background = new Rectangle(10, 10, 1200, 700);
+
         background.setColor(Color.LIGHT_GRAY);
         background.draw();
         background.fill();
 
-        Rectangle header = new Rectangle(10, 10, 1200, 100);
+
         header.setColor(Color.RED);
         header.draw();
         header.fill();
@@ -41,7 +46,7 @@ public class Game {
         Line line2 = new Line(10, 510, 1200, 510);
         line2.draw();
 
-        player = new Player(collisionDetector);
+        player.draw();
 
         controls.setPlayer(player);
 
@@ -78,7 +83,7 @@ public class Game {
                     enemy.setLine_crossed(true);
                     player.setX();
                     init();
-
+                    break;
                 }
             }
         }
