@@ -6,6 +6,9 @@ import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
 import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,9 +29,9 @@ public class Game {
 
     }
 
-    public void init() {
+    public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resource/bg.jpg");
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
         background.draw();
 
         Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);

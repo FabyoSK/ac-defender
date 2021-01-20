@@ -18,7 +18,7 @@ public class Enemy {
 
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
-        this.enemyChar = new Picture(1160, enemyType.chooseRoad(),"resource/baseenemy.png" );
+        this.enemyChar = new Picture(1160, enemyType.chooseRoad(),"resources/arvore-removebg-preview.png" );
         this.enemyChar.draw();
         this.dead = false;
         this.line_crossed = false;
