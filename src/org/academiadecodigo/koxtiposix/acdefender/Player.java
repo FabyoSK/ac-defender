@@ -4,49 +4,43 @@ import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Player {
-    private int key = 3;
-    private int defaultPos;
-    private Rectangle playerChar;
-    private static final int PIXEL_JUMP = 200;
-    private static int size = 32;
-    private int playerX = 200;
-    private static int playerY = 410 - size / 2;
-    private int x = 0;
-    private Weapon weapon;
+
+    private final Rectangle playerChar;
+    private final Weapon weapon;
+
+    private final int x = 0;
+
 
     public Player(CollisionDetector detector) {
-        playerChar = new Rectangle(playerX, playerY, 32, 32);
+
+        playerChar = new Rectangle(Utils.PLAYER_X_POS, Utils.PLAYER_Y_POS, Utils.SIZE, Utils.SIZE);
         playerChar.draw();
         playerChar.fill();
         weapon = new Weapon(detector);
     }
 
-
     public void moveUp() {
-        if (x != 1) {
-            playerChar.translate(0, -PIXEL_JUMP);
-            x++;
+
+        if (Utils.X_POS != 1) {
+            playerChar.translate(0, - Utils.JUMP_SIZE);
+            Utils.X_POS++;
         }
-        System.out.println(x);
+        System.out.println(Utils.X_POS);
     }
 
     public void moveDown() {
-        if (x != -1) {
-            playerChar.translate(0, PIXEL_JUMP);
-            x--;
+
+        if (Utils.X_POS != -1) {
+            playerChar.translate(0, Utils.JUMP_SIZE);
+            Utils.X_POS--;
         }
-        System.out.println(x);
+        System.out.println(Utils.X_POS);
 
     }
-
 
     public void shoot() {
 
         weapon.shoot(playerChar.getY());
-    }
-
-    public void setX() {
-        this.x = 0;
     }
 
     public void moveBullet() {

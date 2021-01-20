@@ -1,16 +1,14 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
+import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public enum EnemyType {
-    LACKEY(1, 4, Color.BLACK),
+    LACKEY(2, 4, Color.BLACK),
     MIDDLE_BOSS(1, 3, Color.BLUE),
     FINAL_BOSS(1, 2, Color.ORANGE),
     PCM(1, 1, Color.DARK_GRAY);
 
-    private final int ROAD_ONE = 194;
-    private final int ROAD_TWO = 394;
-    private final int ROAD_THREE = 594;
     private int hp;
     private int speed;
     private Color color;
@@ -36,13 +34,13 @@ public enum EnemyType {
 
         switch(randomRoadPos) {
             case 0:
-                chooseRoad = ROAD_ONE;
+                chooseRoad = Utils.ROAD_ONE;
                 break;
             case 1:
-                chooseRoad = ROAD_TWO;
+                chooseRoad = Utils.ROAD_TWO;
                 break;
             default:
-                chooseRoad = ROAD_THREE;
+                chooseRoad = Utils.ROAD_THREE;
                 break;
         }
 
