@@ -47,15 +47,32 @@ public class Weapon {
         }
 
 
+
         Iterator<Bullet> iterator = bullets.iterator();
 
         while (iterator.hasNext()) {
 
-            if(iterator.next().isHit()) {
+            if (iterator.next().isHit()) {
                 iterator.remove();
             }
 
         }
 
     }
+
+    public void eraseBullets() {
+        for (Bullet bullet : bullets) {
+            bullet.erase();
+        }
+        bullets.removeAll(bullets);
+    }
+
+    public int getShotsMade() {
+        return shotsMade;
+    }
+
+    public static int getMaxShoots() {
+        return MAX_SHOOTS;
+    }
+
 }

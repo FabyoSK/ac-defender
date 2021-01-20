@@ -14,8 +14,9 @@ public class Game {
     CollisionDetector collisionDetector;
     Player player;
     Controls controls;
+    Text bulletsCount;
 
-    public Game(){
+    public Game() {
 
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
@@ -23,7 +24,7 @@ public class Game {
 
     }
 
-    public void init(){
+    public void init() {
 
         Rectangle background = new Rectangle(Utils.PADDING, Utils.PADDING, Utils.GAME_WIDTH, Utils.GAME_HEIGHT);
         background.setColor(Color.LIGHT_GRAY);
@@ -51,37 +52,56 @@ public class Game {
 
         int x = 0;
 
-        while (true) {
+        while (player.health() > 0) {
 
-            if(x % 5 == 0 && x < 1000) {
+            while (true) {
+                hud();
+                if (x % 5 == 0 && x < 1000) {
 
-                enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
+                    enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
 
-            }
+                }
+                for (Enemy enemy : enemies) {
 
-            for(Enemy enemy : enemies) {
+                    enemy.move();
 
-                enemy.move();
+                }
 
-            }
+                player.moveBullet();
+                Thread.sleep(50);
+                x++;
 
-            player.moveBullet();
-            Thread.sleep(50);
-            x++;
+                for (Enemy enemy : enemies) {
 
-            for (Enemy enemy: enemies) {
+                    if (enemy.isLine_crossed()) {
 
-                if(enemy.isLine_crossed()){
+                        enemy.setLine_crossed(true);
+                        player.takeKey();
+                        x = 1001;
+                        break;
+                        //gameEnd();
+                    }
+                }
 
-                    enemy.setLine_crossed(true);
-                    x = 1001;
-                    gameEnd();
+                if (x == 1001) {
+                    x = 0;
+                    for (Enemy enemy : enemies) {
+                        enemy.erase();
+                    }
+                    enemies.removeAll(enemies);
+                    player.eraseBullets();
+                    Thread.sleep(700);
+                    System.out.println("Player HP: " + player.health());
+                    break;
                 }
             }
-        }
 
+
+        }
+        gameEnd();
     }
-    private void gameEnd(){
+
+    private void gameEnd() {
         if (!enemies.isEmpty()) {
             enemies.removeAll(enemies);
         }
@@ -94,5 +114,13 @@ public class Game {
         Text text = new Text(600, 300, "Game Over MotherFucker");
         text.setColor(Color.WHITE);
         text.draw();
+    }
+
+    private void hud() {
+        if (bulletsCount != null) {
+            bulletsCount.delete();
+        }
+        bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
+        bulletsCount.draw();
     }
 }

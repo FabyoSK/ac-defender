@@ -2,12 +2,15 @@ package org.academiadecodigo.koxtiposix.acdefender;
 
 import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+import java.util.ConcurrentModificationException;
 
 public class Player {
 
-    private Rectangle playerChar;
+    private Picture playerChar;
     private final Weapon weapon;
-
+    private int health;
     private final int x = 0;
 
 
@@ -17,9 +20,10 @@ public class Player {
     }
 
     public void draw(){
-        playerChar = new Rectangle(Utils.PLAYER_X_POS, Utils.PLAYER_Y_POS, Utils.SIZE, Utils.SIZE);
+        // playerChar = new Rectangle(Utils.PLAYER_X_POS, Utils.PLAYER_Y_POS, Utils.SIZE, Utils.SIZE);
+        playerChar = new Picture(10 , Utils.PLAYER_Y_POS - 60, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
         playerChar.draw();
-        playerChar.fill();
+        //playerChar.fill();
     }
 
     public void moveUp() {
@@ -46,8 +50,31 @@ public class Player {
         weapon.shoot(playerChar.getY());
     }
 
-    public void moveBullet() {
-        weapon.moveBullet();
 
+    public void moveBullet() {
+        try {
+            weapon.moveBullet();
+        }catch (ConcurrentModificationException e){
+            e.getMessage();
+        }
+
+    }
+
+    public void takeKey() {
+        health--;
+    }
+
+    public int health() {
+        return health;
+    }
+
+    public void eraseBullets() {
+        weapon.eraseBullets();
+    }
+    public int getShotsMade(){
+        return weapon.getShotsMade();
+    }
+    public static int getMaxShoots(){
+        return Weapon.getMaxShoots();
     }
 }

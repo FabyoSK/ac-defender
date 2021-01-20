@@ -9,8 +9,8 @@ public class Utils {
     public static int HEADER_LENGTH = 100;
     public static int SIZE = 32;
     public static int PADDING = 10;
-    public static int ROAD_LINE1_Y_POS = (GAME_HEIGHT - HEADER_LENGTH) / 3 + HEADER_LENGTH + PADDING;
-    public static int ROAD_LINE2_Y_POS = (GAME_HEIGHT - HEADER_LENGTH) / 2 + HEADER_LENGTH * 2 + PADDING;
+    public static int ROAD_LINE1_Y_POS = (GAME_HEIGHT - HEADER_LENGTH) / 3 + HEADER_LENGTH + PADDING; //310
+    public static int ROAD_LINE2_Y_POS = (GAME_HEIGHT - HEADER_LENGTH) / 2 + HEADER_LENGTH * 2 + PADDING; //510
 
     /*------------*/
 
@@ -41,7 +41,7 @@ public class Utils {
 
     public static int BULLET_LIMIT = 1150;
     public static int BULLET_SPEED = 50;
-    public static int BULLET_X_POS = 233;
+    public static int BULLET_X_POS = 165;
     public static int BULLET_WIDTH = 8;
     public static int BULLET_HEIGHT = 8;
 

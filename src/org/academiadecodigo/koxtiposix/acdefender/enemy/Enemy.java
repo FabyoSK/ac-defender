@@ -63,4 +63,7 @@ public class Enemy {
     public boolean isLine_crossed() {
         return line_crossed;
     }
+    public void erase() {
+        enemyChar.delete();
+    }
 }

@@ -21,7 +21,7 @@ public class Bullet {
 
     public void move() {
 
-        if(bullet.getX() >= Utils.BULLET_LIMIT) {
+        if (bullet.getX() >= Utils.BULLET_LIMIT) {
 
             bullet.delete();
             hit = true;
@@ -29,19 +29,21 @@ public class Bullet {
 
         }
 
-        for(int i = 0; i < Utils.BULLET_SPEED; i++) {
+        for (int i = 0; i < Utils.BULLET_SPEED; i++) {
 
             bullet.translate(1, 0);
 
-            if(detector.checkCollision(bullet)) {
+            if (detector.checkCollision(bullet)) {
 
                 hit = true;
                 bullet.delete();
                 return;
 
             }
+        }}
+        public void erase () {
+            bullet.delete();
         }
-    }
 
     public boolean isHit() {
         return hit;
