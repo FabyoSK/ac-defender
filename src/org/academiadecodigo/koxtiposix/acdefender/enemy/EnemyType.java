@@ -3,10 +3,10 @@ package org.academiadecodigo.koxtiposix.acdefender.enemy;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public enum EnemyType {
-    LACKEY(1, 4, Color.BLACK),
-    MIDDLE_BOSS(1, 3, Color.BLUE),
-    FINAL_BOSS(1, 2, Color.ORANGE),
-    PCM(1, 1, Color.DARK_GRAY);
+    LACKEY(2, 4, Color.BLACK),
+    MIDDLE_BOSS(5, 3, Color.BLUE),
+    FINAL_BOSS(7, 2, Color.ORANGE),
+    PCM(10, 1, Color.RED);
 
     private final int ROAD_ONE = 194;
     private final int ROAD_TWO = 394;
