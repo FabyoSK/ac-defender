@@ -28,7 +28,7 @@ public class Weapon {
 
     public void shoot(int playerPosition) {
 
-        if(shotsMade >= MAX_SHOOTS) {
+        if (shotsMade >= MAX_SHOOTS) {
             shotsMade = 0;
         }
         bullets.add(new Bullet(playerPosition, detector));
@@ -40,12 +40,11 @@ public class Weapon {
 
         for (Bullet bullet : bullets) {
 
-            if(bullet != null) {
+            if (bullet != null) {
                 bullet.move();
             }
 
         }
-
 
 
         Iterator<Bullet> iterator = bullets.iterator();
@@ -74,5 +73,4 @@ public class Weapon {
     public static int getMaxShoots() {
         return MAX_SHOOTS;
     }
-
 }

@@ -41,11 +41,12 @@ public class Bullet {
 
             }
         }}
-        public void erase () {
-            bullet.delete();
-        }
 
     public boolean isHit() {
         return hit;
+    }
+
+    public void erase() {
+        bullet.delete();
     }
 }

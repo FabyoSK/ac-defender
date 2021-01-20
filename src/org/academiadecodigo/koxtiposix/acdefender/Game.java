@@ -3,7 +3,10 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
+import org.academiadecodigo.koxtiposix.acdefender.weapons.Bullet;
+import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
 import org.academiadecodigo.simplegraphics.graphics.*;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,13 +29,11 @@ public class Game {
 
     public void init() {
 
-        Rectangle background = new Rectangle(Utils.PADDING, Utils.PADDING, Utils.GAME_WIDTH, Utils.GAME_HEIGHT);
-        background.setColor(Color.LIGHT_GRAY);
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resource/bg.jpg");
         background.draw();
-        background.fill();
 
         Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);
-        header.setColor(Color.RED);
+        header.setColor(Color.GRAY);
         header.draw();
         header.fill();
 
@@ -100,6 +101,7 @@ public class Game {
         }
         gameEnd();
     }
+
 
     private void gameEnd() {
         if (!enemies.isEmpty()) {
