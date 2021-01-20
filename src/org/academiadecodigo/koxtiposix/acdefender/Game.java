@@ -17,26 +17,22 @@ public class Game {
     Player player;
     Controls controls;
     Canvas gameArea;
-    Rectangle background;
-    Rectangle header;
+    int n = 0;
 
     public Game(){
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
         controls = new Controls();
-        background = new Rectangle(10, 10, 1200, 700);
-        header = new Rectangle(10, 10, 1200, 100);
-        player = new Player(collisionDetector);
     }
 
 
-    public void init(){
-
+    public void init() {
+        Rectangle background = new Rectangle(10, 10, 1200, 700);
         background.setColor(Color.LIGHT_GRAY);
         background.draw();
         background.fill();
 
-
+        Rectangle header = new Rectangle(10, 10, 1200, 100);
         header.setColor(Color.RED);
         header.draw();
         header.fill();
@@ -46,9 +42,9 @@ public class Game {
         Line line2 = new Line(10, 510, 1200, 510);
         line2.draw();
 
-        player.draw();
-
+        player = new Player(collisionDetector);
         controls.setPlayer(player);
+        controls.init();
 
         if(!enemies.isEmpty())  {
             enemies.removeAll(enemies);
@@ -82,11 +78,25 @@ public class Game {
                 if(enemy.isLine_crossed()){
                     enemy.setLine_crossed(true);
                     player.setX();
-                    init();
-                    break;
+                    x = 1001;
+                    gameEnd();
                 }
             }
         }
 
+    }
+    private void gameEnd(){
+        if (!enemies.isEmpty()) {
+            enemies.removeAll(enemies);
+        }
+
+        Rectangle background = new Rectangle(10, 10, 1200, 700);
+        background.setColor(Color.BLACK);
+        background.draw();
+        background.fill();
+
+        Text text = new Text(600, 300, "Game Over MotherFucker");
+        text.setColor(Color.WHITE);
+        text.draw();
     }
 }

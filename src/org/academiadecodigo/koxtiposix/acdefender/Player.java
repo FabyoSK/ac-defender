@@ -42,7 +42,7 @@ public class Player {
     }
 
 
-    public void shoot() {
+    public void shoot() throws InterruptedException {
 
         weapon.shoot(playerChar.getY());
     }

@@ -8,6 +8,9 @@ public enum EnemyType {
     FINAL_BOSS(1, 2, Color.ORANGE),
     PCM(1, 1, Color.DARK_GRAY);
 
+    private final int ROAD_ONE = 194;
+    private final int ROAD_TWO = 394;
+    private final int ROAD_THREE = 594;
     private int hp;
     private int speed;
     private Color color;
@@ -26,24 +29,24 @@ public enum EnemyType {
         return speed;
     }
 
-    public int initialY() {
+    public int chooseRoad() {
 
-        int initialY = (int) Math.floor(Math.random() * 3);
-        int y;
+        int randomRoadPos = (int) Math.floor(Math.random() * 3);
+        int chooseRoad;
 
-        switch(initialY) {
+        switch(randomRoadPos) {
             case 0:
-                y = 210 - 16;
+                chooseRoad = ROAD_ONE;
                 break;
             case 1:
-                y = 410 - 16;
+                chooseRoad = ROAD_TWO;
                 break;
             default:
-                y = 610 - 16;
+                chooseRoad = ROAD_THREE;
                 break;
         }
 
-        return y;
+        return chooseRoad;
     }
 
     public Color getColor() {
