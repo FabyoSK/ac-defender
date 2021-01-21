@@ -31,17 +31,16 @@ public class Game {
 
     public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/battlefield-1-jogo-destruicao-guerra-papel-de-parede-2560x1600-16528_7 (1).jpg");
         background.draw();
 
-        Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);
-        header.setColor(Color.GRAY);
+        Picture header = new Picture(10, 10,"resources/ac defender.png");
         header.draw();
-        header.fill();
 
-        Line line1 = new Line(Utils.PADDING, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
+
+        Line line1 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
         line1.draw();
-        Line line2 = new Line(Utils.PADDING, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
+        Line line2 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
         line2.draw();
 
         player = new Player(collisionDetector);
@@ -121,6 +120,7 @@ public class Game {
             bulletsCount.delete();
         }
         bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
+        bulletsCount.setColor(Color.WHITE);
         bulletsCount.draw();
     }
 
@@ -129,6 +129,7 @@ public class Game {
             life_Number.delete();
         }
         life_Number = new Text(150, 50, "key: " + player.health());
+        life_Number.setColor(Color.WHITE);
         life_Number.draw();
     }
 }
