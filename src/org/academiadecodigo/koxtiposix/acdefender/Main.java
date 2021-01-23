@@ -14,18 +14,29 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException, UnsupportedAudioFileException, IOException, LineUnavailableException {
         Game g = new Game();
-
+        int x = 0;
         ControlMenu controlMenu;
         controlMenu = new ControlMenu();
         controlMenu.setPlayer(g);
         controlMenu.init();
 
+
+        while (true){
+            if (controlMenu.start()){
+                System.out.println("SSSs");
+                break;
+            }
+            System.out.println("FF");
+        }
+        g.init();
+        g.start();
     }
 
 
     static class ControlMenu implements KeyboardHandler {
 
         private Game game;
+        private boolean start;
 
         public void init() {
 
@@ -41,18 +52,16 @@ public class Main {
         public void setPlayer(Game game) {
             this.game = game;
         }
-
+        public boolean start(){
+            return start;
+        }
         @Override
         public void keyPressed(KeyboardEvent keyboardEvent) {
 
             switch (keyboardEvent.getKey()) {
 
                 case KeyboardEvent.KEY_ENTER:
-                    try {
-                        game.init();
-                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    start = true;
                     break;
             }
         }
