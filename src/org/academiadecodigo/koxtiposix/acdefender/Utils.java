@@ -31,9 +31,9 @@ public class Utils {
 
     /* CLASS ENEMYTYPE */
 
-    public static int ROAD_ONE = 194;
-    public static int ROAD_TWO = 394;
-    public static int ROAD_THREE = 594;
+    public static int ROAD_ONE = 194 + 16 - 77;  // +16 equivalente a metade do tamanho do inimigo anterior
+    public static int ROAD_TWO = 394 + 16 - 77; // -64 equivalente a metade do tamanho do inimigo atual
+    public static int ROAD_THREE = 594 + 16 - 77;
 
     /*------------*/
 

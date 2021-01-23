@@ -1,6 +1,5 @@
 package org.academiadecodigo.koxtiposix.acdefender;
 
-import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
@@ -28,31 +27,26 @@ public class Game {
 
     }
 
-    public void boot() throws InterruptedException {
-        //Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
-        //background.draw();
+    public Game() {
 
+        enemies = new LinkedList<>();
+        collisionDetector = new CollisionDetector(enemies);
+        controls = new Controls();
 
     }
 
     public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
 
-        //Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
-        //background.draw();
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/battlefield-1-jogo-destruicao-guerra-papel-de-parede-2560x1600-16528_7 (1).jpg");
+        background.draw();
 
-        Rectangle rectangle = new Rectangle(Utils.PADDING, Utils.PADDING, 1200, 700);
-        rectangle.draw();
-        rectangle.setColor(Color.BLUE);
-        rectangle.fill();
-
-        Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);
-        header.setColor(Color.GRAY);
+        Picture header = new Picture(10, 10,"resources/ac defender.png");
         header.draw();
-        header.fill();
 
-        Line line1 = new Line(Utils.PADDING, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
+
+        Line line1 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
         line1.draw();
-        Line line2 = new Line(Utils.PADDING, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
+        Line line2 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
         line2.draw();
         controls = new Controls();
         enemies = new LinkedList<>();
@@ -115,7 +109,6 @@ public class Game {
 
 
         }
-        BGM.stop();
         gameEnd();
     }
 
@@ -124,7 +117,7 @@ public class Game {
             enemies.removeAll(enemies);
         }
 
-        Picture background = new Picture(10, 10, "resources/gameover.png");
+        Picture background = new Picture(10, 10,"resources/gameover.png");
         background.draw();
 
         String GameOverAudioFile = "resources/audio/gameover.wav";
