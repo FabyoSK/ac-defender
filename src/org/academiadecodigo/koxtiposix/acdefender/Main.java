@@ -14,19 +14,14 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException, UnsupportedAudioFileException, IOException, LineUnavailableException {
         Game g = new Game();
-        int x = 0;
+
         ControlMenu controlMenu;
         controlMenu = new ControlMenu();
         controlMenu.setPlayer(g);
         controlMenu.init();
 
-
-        while (true){
-            if (controlMenu.start()){
-                System.out.println("SSSs");
-                break;
-            }
-            System.out.println("FF");
+        while (!controlMenu.start()) {
+            System.out.println();
         }
         g.init();
         g.start();
@@ -52,9 +47,11 @@ public class Main {
         public void setPlayer(Game game) {
             this.game = game;
         }
-        public boolean start(){
+
+        public boolean start() {
             return start;
         }
+
         @Override
         public void keyPressed(KeyboardEvent keyboardEvent) {
 
