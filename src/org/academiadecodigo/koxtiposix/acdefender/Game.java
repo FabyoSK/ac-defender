@@ -21,22 +21,29 @@ public class Game {
     Controls controls;
     Text bulletsCount;
     Text life_Number;
-
     private String BGMAudioFile = "resources/audio/bgm.wav";
     Audio BGM = new Audio(BGMAudioFile);
 
     public Game() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-        enemies = new LinkedList<>();
-        collisionDetector = new CollisionDetector(enemies);
-        controls = new Controls();
+    }
+
+    public void boot() throws InterruptedException {
+        //Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
+        //background.draw();
+
 
     }
 
-    public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
 
-        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
-        background.draw();
+        //Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
+        //background.draw();
+
+        Rectangle rectangle = new Rectangle(Utils.PADDING, Utils.PADDING, 1200, 700);
+        rectangle.draw();
+        rectangle.setColor(Color.BLUE);
+        rectangle.fill();
 
         Rectangle header = new Rectangle(10, 10, Utils.GAME_WIDTH, Utils.HEADER_LENGTH);
         header.setColor(Color.GRAY);
@@ -47,12 +54,13 @@ public class Game {
         line1.draw();
         Line line2 = new Line(Utils.PADDING, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
         line2.draw();
-
+        controls = new Controls();
+        enemies = new LinkedList<>();
+        collisionDetector = new CollisionDetector(enemies);
         player = new Player(collisionDetector);
         player.draw();
         controls.setPlayer(player);
         controls.init();
-
     }
 
     public void start() throws InterruptedException, IOException, LineUnavailableException, UnsupportedAudioFileException {
@@ -110,7 +118,6 @@ public class Game {
         BGM.stop();
         gameEnd();
     }
-
 
     private void gameEnd() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         if (!enemies.isEmpty()) {
