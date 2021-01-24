@@ -21,13 +21,18 @@ public class Game {
     Controls controls;
     Text bulletsCount;
     Text life_Number;
-    private String BGMAudioFile = "resources/audio/bgm.wav";
+    private String BGMAudioFile = "/resources/audio/bgm.wav";
     Audio BGM = new Audio(BGMAudioFile);
 
     public Game() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
+        boot();
     }
 
+    public void boot() {
+        Rectangle bootScreen = new Rectangle(Utils.PADDING, Utils.PADDING, 1200, 700);
+        bootScreen.draw();
+        bootScreen.fill();
+    }
 
     public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
 
@@ -56,7 +61,7 @@ public class Game {
     }
 
     public void start() throws InterruptedException, IOException, LineUnavailableException, UnsupportedAudioFileException {
-        BGM.play();
+        BGM.play(true);
         int x = 0;
 
         while (player.health() > 0) {
@@ -110,7 +115,7 @@ public class Game {
         gameEnd();
     }
 
-    private void gameEnd() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    private void gameEnd() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
         if (!enemies.isEmpty()) {
             enemies.removeAll(enemies);
         }
@@ -118,8 +123,9 @@ public class Game {
         Picture background = new Picture(10, 10, "resources/gameover.png");
         background.draw();
 
-        String GameOverAudioFile = "resources/audio/gameover.wav";
-        new Audio(GameOverAudioFile).play();
+        String GameOverAudioFile = "/resources/audio/gameover.wav";
+        new Audio(GameOverAudioFile).play(true);
+
     }
 
     private void bulletsHud() {

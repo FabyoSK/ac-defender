@@ -2,6 +2,7 @@ package org.academiadecodigo.koxtiposix.acdefender.audio;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -11,61 +12,73 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Audio {
 
-    // to store current position
-    Long currentFrame;
-    Clip clip;
+    private Clip clip;
+    private URL soundURL;
 
-    // current status of clip
-    String status;
-    AudioInputStream audioInputStream;
-
-    // constructor to initialize streams and clip
-    public Audio(String shootAudioFile)
-            throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException {
-        // create AudioInputStream object
-        audioInputStream =
-                AudioSystem.getAudioInputStream(new File(shootAudioFile).getAbsoluteFile());
-
-        clip = AudioSystem.getClip();
-        // create clip reference
-
+    public Audio(String path) {
+        initClip(path);
     }
 
-   /* public static void main(String[] args) {
-        try {
-            filePath = "Your path for the file";
-            Audio audioPlayer = new Audio(shootAudioFile);
+    /**
+     * Plays the clip from the point it was stopped or from start if passed with the fromStart argument false or true
+     *
+     * @param fromStart should be true if want to replay the sound from the start or false otherwise
+     */
+    public void play(boolean fromStart) {
 
-            audioPlayer.play();
-
-        } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-
+        if (fromStart) {
+            clip.setFramePosition(0);
         }
-    }
-
-    */
-
-    // Method to play the audio
-    public void play() throws LineUnavailableException, IOException {
-
-
-        // open audioInputStream to the clip
-        clip.open(audioInputStream);
-
-        //start the clip
         clip.start();
-        status = "play";
     }
 
-    // Method to stop the audio
-    public void stop() throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException {
-        currentFrame = 0L;
+    public void stop() {
+
         clip.stop();
+    }
+
+    public void close() {
+
         clip.close();
     }
 
+    public void setLoop(int times) {
+        clip.loop(times);
+    }
+
+    public void reOpen() {
+
+        AudioInputStream inputStream = null;
+
+        try {
+
+            inputStream = AudioSystem.getAudioInputStream(soundURL);
+            clip.open(inputStream);
+
+        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private void initClip(String path) {
+
+        soundURL = Audio.class.getResource(path); //if loading from jar
+        AudioInputStream inputStream = null;
+
+        try {
+
+            if (soundURL == null) {
+                path = path.substring(1);
+                File file = new File(path);
+                soundURL = file.toURI().toURL(); //if executing on intellij
+            }
+
+            inputStream = AudioSystem.getAudioInputStream(soundURL);
+            clip = AudioSystem.getClip();
+            clip.open(inputStream);
+
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
