@@ -54,7 +54,7 @@ public class Player {
 
         x2 ++;
         if (x2 == 1 && x1 != 1) {
-            playerChar.translate(80 , -Utils.JUMP_SIZE);
+            playerChar.translate(0 , -Utils.JUMP_SIZE);
 
             x1 ++;
         }x2 = 0;
@@ -67,7 +67,7 @@ public class Player {
 
         x2--;
         if (x2 == -1 && x1 != -1) {
-            playerChar.translate(-80, Utils.JUMP_SIZE);
+            playerChar.translate(0, Utils.JUMP_SIZE);
 
             x1--;
 
