@@ -26,7 +26,7 @@ public class Weapon {
 
         bullets = new LinkedList<>();
         detector.setBullets((LinkedList<Bullet>) bullets);
-        shotsMade = 0;
+        shotsMade = MAX_SHOOTS;
         damage = 5;
         this.detector = detector;
 
@@ -34,14 +34,14 @@ public class Weapon {
 
 
     public void shoot(int playerPosition) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
-        if (shotsMade >= MAX_SHOOTS) {
-            shotsMade = 0;
-        }
         bullets.add(new Bullet(playerPosition, detector));
-        shotsMade++;
+        shotsMade--;
         Audio shotAudio = new Audio(shootAudioFile);
         shotAudio.play();
+
+        if (shotsMade <= 0) {
+            shotsMade = MAX_SHOOTS;
+        }
     }
 
     public void moveBullet() {

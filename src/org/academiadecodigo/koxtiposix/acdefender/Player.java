@@ -22,33 +22,53 @@ public class Player {
 
 
     public Player(CollisionDetector detector) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        playerChar = new Picture(10, Utils.PLAYER_Y_POS - 60, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
+        playerChar = new Picture(80, Utils.PLAYER_Y_POS - 60, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
 
         weapon = new Weapon(detector);
-        health = 3;
+        health = 1;
     }
 
     public void draw() {
         // playerChar = new Rectangle(Utils.PLAYER_X_POS, Utils.PLAYER_Y_POS, Utils.SIZE, Utils.SIZE);
         playerChar.draw();
     }
+    private int x1 = 0;
+    private int x2 = 0;
+
+    public int getX1() {
+        return x1;
+    }
+
+    public int getX2() {
+        return x2;
+    }
+
+    public Picture getPlayerChar() {
+        return playerChar;
+    }
 
     public void moveUp() {
 
-        if (Utils.X_POS != 1) {
-            playerChar.translate(0, -Utils.JUMP_SIZE);
-            Utils.X_POS++;
-        }
-        System.out.println(Utils.X_POS);
+        x2 ++;
+        if (x2 == 1 && x1 != 1) {
+            playerChar.translate(80 , -Utils.JUMP_SIZE);
+
+            x1 ++;
+        }x2 = 0;
+        System.out.println(x2);
+        System.out.println("--" + x1);
     }
 
     public void moveDown() {
 
-        if (Utils.X_POS != -1) {
-            playerChar.translate(0, Utils.JUMP_SIZE);
-            Utils.X_POS--;
-        }
-        System.out.println(Utils.X_POS);
+        x2--;
+        if (x2 == -1 && x1 != -1) {
+            playerChar.translate(-80, Utils.JUMP_SIZE);
+
+            x1--;
+
+        }x2 = 0;
+        System.out.println(x2);
 
     }
 

@@ -22,7 +22,7 @@ public class Audio {
     // constructor to initialize streams and clip
     public Audio(String shootAudioFile)
             throws UnsupportedAudioFileException,
-            IOException, LineUnavailableException {
+        IOException, LineUnavailableException {
         // create AudioInputStream object
         audioInputStream =
                 AudioSystem.getAudioInputStream(new File(shootAudioFile).getAbsoluteFile());

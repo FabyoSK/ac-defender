@@ -1,6 +1,7 @@
 package org.academiadecodigo.koxtiposix.acdefender.weapons;
 
 import org.academiadecodigo.koxtiposix.acdefender.CollisionDetector;
+import org.academiadecodigo.koxtiposix.acdefender.Player;
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -15,10 +16,12 @@ public class Bullet {
     private boolean hit;
     private final Ellipse bullet;
     private final CollisionDetector detector;
+    private Player player;
+
 
 
     public Bullet(int BULLET_Y_POS, CollisionDetector detector) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
+        //if (player)
         bullet = new Ellipse(Utils.BULLET_X_POS, BULLET_Y_POS + 72, Utils.BULLET_WIDTH, Utils.BULLET_HEIGHT);
         bullet.setColor(Color.YELLOW);
         bullet.fill();

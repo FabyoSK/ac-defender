@@ -3,7 +3,8 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
-import org.academiadecodigo.simplegraphics.graphics.*;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -31,42 +32,44 @@ public class Game {
 
     public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/battlefield-1-jogo-destruicao-guerra-papel-de-parede-2560x1600-16528_7 (1).jpg");
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING * 10, "resources/bckgrnd.png");
         background.draw();
-
-        Picture header = new Picture(10, 10,"resources/ac defender.png");
+        Picture header = new Picture(10, 10, "resources/ac defender.png");
         header.draw();
-
-
-        Line line1 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
-        line1.draw();
-        Line line2 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
-        line2.draw();
 
         player = new Player(collisionDetector);
         player.draw();
+
         controls.setPlayer(player);
         controls.init();
 
+        life_Number = new Text(150, 50, "key: " + player.health());
+        bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
     }
+
+
 
     public void start() throws InterruptedException {
 
         int x = 0;
+        int enemyDeads = 0;
 
+//        while (player.health() > 0 || !Game.hasNextLevel()) {
         while (player.health() > 0) {
 
             while (true) {
                 bulletsHud();
                 lifeHud();
-                if (x % 5 == 0 && x < 1000) {
 
+                if(x % 5 == 0 && x < 1000) {
+
+                    //System.out.println("new enemy should appear");
                     enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
-
                 }
+
                 for (Enemy enemy : enemies) {
 
-                    enemy.move();
+                    enemy.move(enemy);
 
                 }
 
@@ -102,24 +105,39 @@ public class Game {
 
 
         }
-        gameEnd();
+        //if(player.health() == 0)
+        //gameEnd();
+        gameEnd(player.health());
+        //
+        //display end of story screen
+        //
     }
 
 
-    private void gameEnd() {
+    private void gameEnd(int nr_of_keys) throws InterruptedException {
         if (!enemies.isEmpty()) {
             enemies.removeAll(enemies);
         }
 
-        Picture background = new Picture(10, 10,"resources/gameover.png");
+        Picture background = new Picture(10, 10, "resources/gameOver.png");
+
+        if (nr_of_keys == 0) {
+            background = new Picture(10, 10, "resources/theEnd.jpeg");
+
+        }
+
         background.draw();
+
+
     }
 
     private void bulletsHud() {
+
         if (bulletsCount != null) {
             bulletsCount.delete();
         }
-        bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
+
+        bulletsCount.setText(player.getShotsMade() + "/" + Player.getMaxShoots());
         bulletsCount.setColor(Color.WHITE);
         bulletsCount.draw();
     }
@@ -128,7 +146,8 @@ public class Game {
         if (life_Number != null) {
             life_Number.delete();
         }
-        life_Number = new Text(150, 50, "key: " + player.health());
+
+        life_Number.setText(player.health() + "");
         life_Number.setColor(Color.WHITE);
         life_Number.draw();
     }

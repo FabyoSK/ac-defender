@@ -1,14 +1,15 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Enemy {
 
 
     private int hp;
+    private String urlImg;
     private final Picture enemyChar;
+    private int maxFolderImg;
     private boolean dead;
     private final int speed;
     private boolean line_crossed;
@@ -17,29 +18,50 @@ public class Enemy {
     public Enemy(EnemyType enemyType) {
 
         this.hp = enemyType.getHp();
+        this.urlImg = enemyType.getImgUrl();
+        this.maxFolderImg = enemyType.getMaxFolderImg();
         this.speed = enemyType.getSpeed();
-        this.enemyChar = new Picture(1100, enemyType.chooseRoad(),enemyType.getSrc() );
+        this.enemyChar = new Picture(1060, enemyType.chooseRoad(), enemyType.getImgUrl());
         this.enemyChar.draw();
         this.dead = false;
         this.line_crossed = false;
 
     }
 
-    public void move() {
+    int frame = 1;//need to be refactor
 
-        if(enemyChar.getX() <= Utils.DEFEND_LINE) {
+    public void move(Enemy enemy) {
+
+        if (enemyChar.getX() <= Utils.DEFEND_LINE) {
 
             line_crossed = true;
             return;
 
         }
-        enemyChar.translate(-speed, 0);
+
+        if (frame >= enemy.maxFolderImg) {
+            frame = 1;
+        }
+
+        /** Enemy walk animation**/
+        //enemyChar.load(enemy.url);
+        //System.out.println(enemy.urlImg.substring(0, enemy.urlImg.lastIndexOf("."))+ i+".png");
+        //enemyChar.load(enemy.urlImg.substring(0, enemy.urlImg.lastIndexOf("."))+ i+".png");
+        enemyChar.load(enemy.urlImg.substring(0, enemy.urlImg.lastIndexOf("1")) + frame + ".png");
+        //character.draw();
+        enemyChar.translate(-3, 0);
+        //Thread.sleep(150);
+
+        frame++;
+
+
+        // enemyChar.translate(-speed, 0);
     }
 
     public void suffer() {
 
         hp--;
-        if(hp <= 0) {
+        if (hp <= 0) {
 
             dead = true;
             hp = 0;

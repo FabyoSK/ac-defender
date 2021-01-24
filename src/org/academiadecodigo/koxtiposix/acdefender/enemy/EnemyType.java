@@ -5,26 +5,36 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public enum EnemyType {
-    LACKEY(2, 4, "resources/Screen_Shot_2021-01-20_at_16.43.20-removebg-preview (2).png"),
-    MIDDLE_BOSS(5, 3, "resources/Screen_Shot_2021-01-20_at_16.43.20-removebg-preview (2).png"),
-    FINAL_BOSS(7, 2, "resources/soldier2 (1).png"),
-    PCM(10, 1, "resources/soldier2 (1).png");
+    LACKEY(2, 1, "resources/lacey/lacey_walk_0_1.png",6),
+    MIDDLE_BOSS(5, 3, "resources/dc/dc_walk_0_1.png",15),
+    FINAL_BOSS(7, 2, "resources/boss/tile001.png",14);
+    //PCM(10, 1, "resources/soldier2 (1).png");
 
     private final int ROAD_ONE = 194;
     private final int ROAD_TWO = 394;
     private final int ROAD_THREE = 594;
     private int hp;
     private int speed;
-    private String src;
+    private String imgUrl;//enemy
+    private int maxFolderImg;
 
-    EnemyType(int hp, int speed, String src) {
+    EnemyType(int hp, int speed, String imgUrl, int maxFolderImg) {
         this.hp = hp;
         this.speed = speed;
-        this.src = src;
+        this.imgUrl = imgUrl;
+        this.maxFolderImg = maxFolderImg;
     }
 
     public int getHp() {
         return hp;
+    }
+
+    public int getMaxFolderImg() {
+        return maxFolderImg;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
     }
 
     public int getSpeed() {
@@ -51,7 +61,5 @@ public enum EnemyType {
         return chooseRoad;
     }
 
-    public String getSrc() {
-        return src;
-    }
+
 }
