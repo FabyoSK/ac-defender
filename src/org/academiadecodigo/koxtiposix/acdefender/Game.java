@@ -5,6 +5,7 @@ import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
 import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -26,6 +27,9 @@ public class Game {
     private String BGMAudioFile = "/resources/audio/bgm.wav";
     private String enemySpawnAudioFile = "/resources/audio/enemydead.wav";
     Audio BGM = new Audio(BGMAudioFile);
+    public static int enemyDeads = 0;
+    int enemySpawned = 0;
+    boolean gameReset = false;
 
     public Game() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         boot();
@@ -43,14 +47,7 @@ public class Game {
         background.draw();
 
         Picture header = new Picture(10, 10, "resources/ac defender.png");
-        Picture header = new Picture(10, 10, "resources/ac defender.png");
         header.draw();
-
-
-        Line line1 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
-        line1.draw();
-        Line line2 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
-        line2.draw();
 
 
         controls = new Controls();
@@ -75,19 +72,20 @@ public class Game {
         new Audio(enemySpawnAudioFile).play(true);
         BGM.play(true);
         int x = 0;
-        int enemyDeads = 0;
+
 
 //        while (player.health() > 0 || !Game.hasNextLevel()) {
-        while (player.health() > 0) {
+        while (player.health() > 0 ) {
 
             while (true) {
                 bulletsHud();
                 lifeHud();
 
-                if(x % 5 == 0 && x < 1000) {
+                if(x % 5 == 0 && x < 40) {
 
                     //System.out.println("new enemy should appear");
                     enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
+                    enemySpawned++;
                 }
 
                 for (Enemy enemy : enemies) {
@@ -98,7 +96,6 @@ public class Game {
 
                 player.moveBullet();
                 Thread.sleep(50);
-                x++;
 
                 for (Enemy enemy : enemies) {
 
@@ -106,14 +103,17 @@ public class Game {
 
                         enemy.setLine_crossed(true);
                         player.takeKey();
-                        x = 1001;
+                       gameReset = true;
                         break;
                         //gameEnd();
                     }
                 }
 
-                if (x == 1001) {
-                    x = 0;
+                if (gameReset) {
+                    enemySpawned = 0;
+                    enemyDeads = 0;
+                    gameReset = false;
+                    x=0;
                     for (Enemy enemy : enemies) {
                         enemy.erase();
 
@@ -124,6 +124,11 @@ public class Game {
                     System.out.println("Player HP: " + player.health());
                     break;
                 }
+
+
+                System.out.println(enemySpawned +"---"+ enemyDeads);
+                x++;
+
             }
 
 
@@ -138,21 +143,18 @@ public class Game {
 
 
     private void gameEnd(int nr_of_keys) throws InterruptedException {
-    private void gameEnd() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
         if (!enemies.isEmpty()) {
             enemies.removeAll(enemies);
         }
 
         Picture background = new Picture(10, 10, "resources/gameOver.png");
 
-        if (nr_of_keys == 0) {
+        if (nr_of_keys != 0) {
             background = new Picture(10, 10, "resources/theEnd.jpeg");
 
         }
 
-        Picture background = new Picture(10, 10, "resources/gameover.png");
         background.draw();
-
 
 
         String GameOverAudioFile = "/resources/audio/gameover.wav";

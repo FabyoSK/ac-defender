@@ -47,25 +47,15 @@ public class Controls implements KeyboardHandler {
             case KeyboardEvent.KEY_UP:
                 try {
                     player.moveUp();
-                } catch (UnsupportedAudioFileException e) {
+                } catch (UnsupportedAudioFileException | LineUnavailableException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
                     e.printStackTrace();
                 }
                 break;
 
             case KeyboardEvent.KEY_DOWN:
-                try {
-                    player.moveDown();
-                } catch (UnsupportedAudioFileException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (LineUnavailableException e) {
-                    e.printStackTrace();
-                }
+                player.moveDown();
                 break;
 
             case KeyboardEvent.KEY_SPACE:

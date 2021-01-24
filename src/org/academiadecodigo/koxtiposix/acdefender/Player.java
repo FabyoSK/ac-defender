@@ -60,6 +60,7 @@ public class Player {
         }x2 = 0;
         System.out.println(x2);
         System.out.println("--" + x1);
+        new Audio(teletransportAudioFile).play(true);
     }
 
     public void moveDown() {

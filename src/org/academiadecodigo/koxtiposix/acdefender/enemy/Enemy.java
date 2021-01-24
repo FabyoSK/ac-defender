@@ -1,5 +1,6 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
+import org.academiadecodigo.koxtiposix.acdefender.Game;
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -68,6 +69,7 @@ public class Enemy {
 
             dead = true;
             hp = 0;
+            Game.enemyDeads++;
             new Audio(enemyDeadAudioFile).play(true);
             enemyChar.delete();
 

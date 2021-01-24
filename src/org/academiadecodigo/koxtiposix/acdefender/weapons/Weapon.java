@@ -36,13 +36,10 @@ public class Weapon {
     public void shoot(int playerPosition) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         bullets.add(new Bullet(playerPosition, detector));
         shotsMade--;
-        Audio shotAudio = new Audio(shootAudioFile);
-        shotAudio.play();
 
         if (shotsMade <= 0) {
             shotsMade = MAX_SHOOTS;
         }
-        shotsMade++;
         new Audio(shootAudioFile).play(true);
     }
 
