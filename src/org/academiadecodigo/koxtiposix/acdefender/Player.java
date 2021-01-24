@@ -24,7 +24,7 @@ public class Player {
 
 
     public Player(CollisionDetector detector) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        playerChar = new Picture(180, Utils.PLAYER_Y_POS - 60, "resources/Main player.png");
+        playerChar = new Picture(10, Utils.PLAYER_Y_POS - 60, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
 
         weapon = new Weapon(detector);
         health = 3;
@@ -49,29 +49,24 @@ public class Player {
         return playerChar;
     }
 
-    public void moveUp() {
+    public void moveUp() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-        x2 ++;
-        if (x2 == 1 && x1 != 1) {
-            playerChar.translate(0 , -Utils.JUMP_SIZE);
+        if (Utils.X_POS != 1) {
+            playerChar.translate(0, -Utils.JUMP_SIZE);
+            Utils.X_POS++;
+        }
+        System.out.println(Utils.X_POS);
 
-            x1 ++;
-        }x2 = 0;
-        System.out.println(x2);
-        System.out.println("--" + x1);
+        new Audio(teletransportAudioFile).play(true);
     }
-
-    public void moveDown() {
-
-        x2--;
-        if (x2 == -1 && x1 != -1) {
+    public void moveDown() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        if (Utils.X_POS != -1) {
             playerChar.translate(0, Utils.JUMP_SIZE);
+            Utils.X_POS--;
+        }
+        System.out.println(Utils.X_POS);
 
-            x1--;
-
-        }x2 = 0;
-        System.out.println(x2);
-
+        new Audio(teletransportAudioFile).play(true);
     }
 
     public void shoot() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
