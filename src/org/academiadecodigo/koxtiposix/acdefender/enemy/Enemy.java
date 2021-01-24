@@ -1,6 +1,7 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
+import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -12,13 +13,14 @@ public class Enemy {
     private boolean dead;
     private final int speed;
     private boolean line_crossed;
+    private String enemyDeadAudioFile = "/resources/audio/enemydead.wav";
 
 
     public Enemy(EnemyType enemyType) {
 
         this.hp = enemyType.getHp();
         this.speed = enemyType.getSpeed();
-        this.enemyChar = new Picture(1100, enemyType.chooseRoad(),enemyType.getSrc() );
+        this.enemyChar = new Picture(1100, enemyType.chooseRoad(), enemyType.getSrc());
         this.enemyChar.draw();
         this.dead = false;
         this.line_crossed = false;
@@ -27,7 +29,7 @@ public class Enemy {
 
     public void move() {
 
-        if(enemyChar.getX() <= Utils.DEFEND_LINE) {
+        if (enemyChar.getX() <= Utils.DEFEND_LINE) {
 
             line_crossed = true;
             return;
@@ -39,10 +41,11 @@ public class Enemy {
     public void suffer() {
 
         hp--;
-        if(hp <= 0) {
+        if (hp <= 0) {
 
             dead = true;
             hp = 0;
+            new Audio(enemyDeadAudioFile).play(true);
             enemyChar.delete();
 
         }

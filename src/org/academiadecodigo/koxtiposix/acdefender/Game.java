@@ -22,6 +22,7 @@ public class Game {
     Text bulletsCount;
     Text life_Number;
     private String BGMAudioFile = "/resources/audio/bgm.wav";
+    private String enemySpawnAudioFile = "/resources/audio/enemydead.wav";
     Audio BGM = new Audio(BGMAudioFile);
 
     public Game() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -61,6 +62,8 @@ public class Game {
     }
 
     public void start() throws InterruptedException, IOException, LineUnavailableException, UnsupportedAudioFileException {
+
+        new Audio(enemySpawnAudioFile).play(true);
         BGM.play(true);
         int x = 0;
 
@@ -72,7 +75,6 @@ public class Game {
                 if (x % 5 == 0 && x < 1000) {
 
                     enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
-
                 }
                 for (Enemy enemy : enemies) {
 

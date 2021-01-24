@@ -27,7 +27,6 @@ public class Main {
         g.start();
     }
 
-
     static class ControlMenu implements KeyboardHandler {
 
         private Game game;
