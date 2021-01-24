@@ -77,8 +77,8 @@ public class Game {
 
     public void start() throws InterruptedException, IOException, LineUnavailableException, UnsupportedAudioFileException {
 
-        new Audio(enemySpawnAudioFile).play(true);
-        BGM.play(true);
+        new Audio(enemySpawnAudioFile).play();
+        BGM.play();
         int x = 0;
 
 
@@ -88,7 +88,7 @@ public class Game {
                 lifeHud();
 
 
-                if (x % 5 == 0 && x < 40) {
+                if (x % 15 == 0 && x < 500) {
 
                     //System.out.println("new enemy should appear");
                     enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
@@ -135,7 +135,7 @@ public class Game {
                 System.out.println(enemySpawned + "---" + enemyDeads);
                 x++;
 
-                if (enemySpawned == enemyDeads && enemySpawned!=0 && enemyDeads !=0) {
+                if (enemySpawned == enemyDeads && enemySpawned != 0 && enemyDeads != 0) {
                     gameEnd(player.health());
                     break;
                 }
@@ -164,7 +164,16 @@ public class Game {
             background = new Picture(10, 10, "resources/Player wins screen.png");
         } else {
             String GameOverAudioFile = "/resources/audio/gameover.wav";
-            new Audio(GameOverAudioFile).play(true);
+            try {
+                new Audio(GameOverAudioFile).play();
+            } catch (LineUnavailableException e){
+                e.getMessage();
+            } catch (IOException e){
+                e.getMessage();
+            }catch (UnsupportedAudioFileException e){
+                e.getMessage();
+            }
+
         }
 
         background.draw();

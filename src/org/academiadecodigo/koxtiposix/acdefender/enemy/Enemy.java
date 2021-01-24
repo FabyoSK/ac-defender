@@ -6,6 +6,9 @@ import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.ConcurrentModificationException;
 
 public class Enemy {
@@ -19,7 +22,7 @@ public class Enemy {
     private final int speed;
     private boolean line_crossed;
     private String enemyDeadAudioFile = "/resources/audio/enemydead.wav";
-
+    private int frame = 1;//need to be refactor
 
     public Enemy(EnemyType enemyType) {
 
@@ -34,7 +37,7 @@ public class Enemy {
 
     }
 
-    int frame = 1;//need to be refactor
+
 
     public void move(Enemy enemy) {
 
@@ -72,7 +75,16 @@ public class Enemy {
             dead = true;
             hp = 0;
             Game.enemyDeads++;
-            new Audio(enemyDeadAudioFile).play(true);
+            try {
+                new Audio(enemyDeadAudioFile).play();
+            } catch (LineUnavailableException e){
+                e.getMessage();
+            } catch (IOException e){
+                e.getMessage();
+            }catch (UnsupportedAudioFileException e){
+                e.getMessage();
+            }
+
             enemyChar.delete();
 
         }

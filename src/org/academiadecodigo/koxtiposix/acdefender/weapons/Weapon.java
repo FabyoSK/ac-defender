@@ -40,7 +40,7 @@ public class Weapon {
         if (shotsMade <= 0) {
             shotsMade = MAX_SHOOTS;
         }
-        new Audio(shootAudioFile).play(true);
+        new Audio(shootAudioFile).play();
     }
 
     public void moveBullet() {
