@@ -1,5 +1,6 @@
 package org.academiadecodigo.koxtiposix.acdefender;
 
+import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
@@ -27,20 +28,13 @@ public class Game {
 
     }
 
-    public Game() {
-
-        enemies = new LinkedList<>();
-        collisionDetector = new CollisionDetector(enemies);
-        controls = new Controls();
-
-    }
 
     public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
 
         Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/battlefield-1-jogo-destruicao-guerra-papel-de-parede-2560x1600-16528_7 (1).jpg");
         background.draw();
 
-        Picture header = new Picture(10, 10,"resources/ac defender.png");
+        Picture header = new Picture(10, 10, "resources/ac defender.png");
         header.draw();
 
 
@@ -48,9 +42,13 @@ public class Game {
         line1.draw();
         Line line2 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
         line2.draw();
+
+
         controls = new Controls();
         enemies = new LinkedList<>();
         collisionDetector = new CollisionDetector(enemies);
+
+
         player = new Player(collisionDetector);
         player.draw();
         controls.setPlayer(player);
@@ -117,7 +115,7 @@ public class Game {
             enemies.removeAll(enemies);
         }
 
-        Picture background = new Picture(10, 10,"resources/gameover.png");
+        Picture background = new Picture(10, 10, "resources/gameover.png");
         background.draw();
 
         String GameOverAudioFile = "resources/audio/gameover.wav";

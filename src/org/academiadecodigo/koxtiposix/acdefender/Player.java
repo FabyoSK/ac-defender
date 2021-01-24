@@ -44,9 +44,7 @@ public class Player {
 
         new Audio(teletransportAudioFile).play();
     }
-
     public void moveDown() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
         if (Utils.X_POS != -1) {
             playerChar.translate(0, Utils.JUMP_SIZE);
             Utils.X_POS--;
