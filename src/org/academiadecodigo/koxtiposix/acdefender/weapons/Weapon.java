@@ -17,7 +17,7 @@ public class Weapon {
     private final CollisionDetector detector;
     private int damage;
     private int shotsMade;
-    private String shootAudioFile = "resources/audio/shot.wav";
+    private String shootAudioFile = "/resources/audio/shot.wav";
 
 
     private static final int MAX_SHOOTS = 8;
@@ -42,6 +42,8 @@ public class Weapon {
         if (shotsMade <= 0) {
             shotsMade = MAX_SHOOTS;
         }
+        shotsMade++;
+        new Audio(shootAudioFile).play(true);
     }
 
     public void moveBullet() {

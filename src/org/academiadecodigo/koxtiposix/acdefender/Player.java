@@ -13,19 +13,22 @@ import java.util.ConcurrentModificationException;
 
 import java.util.ConcurrentModificationException;
 
+import java.util.ConcurrentModificationException;
+
 public class Player {
 
     private final Picture playerChar;
     private final Weapon weapon;
     private int health;
     private final int x = 0;
+    String teletransportAudioFile = "/resources/audio/dbz-teleport.wav";
 
 
     public Player(CollisionDetector detector) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        playerChar = new Picture(80, Utils.PLAYER_Y_POS - 60, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
+        playerChar = new Picture(10, Utils.PLAYER_Y_POS - 60, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
 
         weapon = new Weapon(detector);
-        health = 1;
+        health = 3;
     }
 
     public void draw() {
@@ -47,7 +50,7 @@ public class Player {
         return playerChar;
     }
 
-    public void moveUp() {
+    public void moveUp() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         x2 ++;
         if (x2 == 1 && x1 != 1) {
@@ -70,6 +73,7 @@ public class Player {
         }x2 = 0;
         System.out.println(x2);
 
+        new Audio(teletransportAudioFile).play(true);
     }
 
     public void shoot() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
