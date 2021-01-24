@@ -13,6 +13,8 @@ import java.util.ConcurrentModificationException;
 
 import java.util.ConcurrentModificationException;
 
+import java.util.ConcurrentModificationException;
+
 public class Player {
 
     private final Picture playerChar;

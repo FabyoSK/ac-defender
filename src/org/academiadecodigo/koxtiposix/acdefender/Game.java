@@ -9,6 +9,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,9 +37,10 @@ public class Game {
         Picture background = new Picture(Utils.PADDING, Utils.PADDING * 10, "resources/Game background.png");
         background.draw();
 
-        //Picture Tree = new Picture(400, 350, "resources/arvore-removebg-preview.png");
-        //Tree.draw();
-
+        Line line1 = new Line(Utils.PADDING, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
+        line1.draw();
+        Line line2 = new Line(Utils.PADDING, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
+        line2.draw();
 
         player = new Player(collisionDetector);
         player.draw();
@@ -107,13 +109,19 @@ public class Game {
             enemies.removeAll(enemies);
         }
 
-        Picture background = new Picture(10, 10,"resources/Game over screen.png");
+        Picture background = new Picture(10, 10,"resources/gameover.png");
         background.draw();
     }
 
     private void bulletsHud() {
         if (bulletsCount != null) {
-            bulletsCount.delete();
+            try {
+                bulletsCount.delete();
+
+            }catch (ConcurrentModificationException e){
+                e.getMessage();
+            }
+
         }
         bulletsCount = new Text(100, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
         bulletsCount.grow(20, 10);

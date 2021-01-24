@@ -4,6 +4,8 @@ import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ConcurrentModificationException;
+
 public class Enemy {
 
 
@@ -33,7 +35,13 @@ public class Enemy {
             return;
 
         }
-        enemyChar.translate(-speed, 0);
+
+        try {
+            enemyChar.translate(-speed, 0);
+        }catch (ConcurrentModificationException e){
+            e.getMessage();
+        }
+
     }
 
     public void suffer() {
