@@ -1,6 +1,5 @@
 package org.academiadecodigo.koxtiposix.acdefender;
 
-import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
@@ -10,6 +9,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,6 +59,7 @@ public class Game {
         player.draw();
         controls.setPlayer(player);
         controls.init();
+
     }
 
     public void start() throws InterruptedException, IOException, LineUnavailableException, UnsupportedAudioFileException {
@@ -75,6 +76,7 @@ public class Game {
                 if (x % 5 == 0 && x < 1000) {
 
                     enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
+
                 }
                 for (Enemy enemy : enemies) {
 
@@ -132,7 +134,13 @@ public class Game {
 
     private void bulletsHud() {
         if (bulletsCount != null) {
-            bulletsCount.delete();
+            try {
+                bulletsCount.delete();
+
+            }catch (ConcurrentModificationException e){
+                e.getMessage();
+            }
+
         }
         bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
         bulletsCount.draw();

@@ -35,7 +35,13 @@ public class Enemy {
             return;
 
         }
-        enemyChar.translate(-speed, 0);
+
+        try {
+            enemyChar.translate(-speed, 0);
+        }catch (ConcurrentModificationException e){
+            e.getMessage();
+        }
+
     }
 
     public void suffer() {
