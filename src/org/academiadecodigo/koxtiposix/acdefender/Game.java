@@ -20,6 +20,9 @@ public class Game {
     CollisionDetector collisionDetector;
     Player player;
     Controls controls;
+    Picture lifeKey;
+    Picture lifeKey1;
+    Picture lifeKey2;
 
     Text life_Number;
     private String BGMAudioFile = "/resources/audio/bgm.wav";
@@ -41,11 +44,20 @@ public class Game {
     }
 
     public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        Picture header = new Picture(10, 10,"resources/Game header.png");
+        Picture header = new Picture(10, 10, "resources/Game header.png");
         header.draw();
 
         Picture background = new Picture(Utils.PADDING, 110, "resources/Game background.png");
         background.draw();
+
+        lifeKey = new Picture(50, 30, "resources/Main key.png");
+        lifeKey.draw();
+
+        lifeKey1 = new Picture(80, 30, "resources/Main key.png");
+        lifeKey1.draw();
+
+        lifeKey2 = new Picture(110, 30, "resources/Main key.png");
+        lifeKey2.draw();
 
 
         controls = new Controls();
@@ -72,58 +84,61 @@ public class Game {
 
 //        while (player.health() > 0 || !Game.hasNextLevel()) {
         while (player.health() > 0) {
+            while (true) {
+                lifeHud();
 
-            lifeHud();
 
+                if (x % 5 == 0 && x < 40) {
 
-            if (x % 5 == 0 && x < 40) {
-
-                //System.out.println("new enemy should appear");
-                enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
-            }
-
-            for (Enemy enemy : enemies) {
-
-                enemy.move(enemy);
-
-            }
-
-            player.moveBullet();
-            Thread.sleep(50);
-
-            for (Enemy enemy : enemies) {
-
-                if (enemy.isLine_crossed()) {
-
-                    enemy.setLine_crossed(true);
-                    player.takeKey();
-                    gameReset = true;
-                    break;
-                    //gameEnd();
+                    //System.out.println("new enemy should appear");
+                    enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
+                    enemySpawned++;
                 }
-            }
 
-            if (gameReset) {
-                enemyDeads = 0;
-                enemySpawned = 0;
-                gameReset = false;
-                x = 0;
                 for (Enemy enemy : enemies) {
-                    enemy.erase();
+
+                    enemy.move(enemy);
 
                 }
-                enemies.removeAll(enemies);
-                player.eraseBullets();
-                Thread.sleep(700);
-                System.out.println("Player HP: " + player.health());
-                break;
-            }
 
-            System.out.println(enemySpawned + "---" + enemyDeads);
-            x++;
+                player.moveBullet();
+                Thread.sleep(50);
 
-            if (enemySpawned == enemyDeads) {
-                break;
+                for (Enemy enemy : enemies) {
+
+                    if (enemy.isLine_crossed()) {
+
+                        enemy.setLine_crossed(true);
+                        player.takeKey();
+                        gameReset = true;
+                        break;
+                        //gameEnd();
+                    }
+                }
+
+                if (gameReset) {
+                    enemyDeads = 0;
+                    enemySpawned = 0;
+                    gameReset = false;
+                    x = 0;
+                    for (Enemy enemy : enemies) {
+                        enemy.erase();
+
+                    }
+                    enemies.removeAll(enemies);
+                    player.eraseBullets();
+                    Thread.sleep(700);
+                    System.out.println("Player HP: " + player.health());
+                    break;
+                }
+
+                System.out.println(enemySpawned + "---" + enemyDeads);
+                x++;
+
+                if (enemySpawned == enemyDeads && enemySpawned!=0 && enemyDeads !=0) {
+                    gameEnd(player.health());
+                    break;
+                }
             }
 
         }
@@ -146,14 +161,14 @@ public class Game {
         Picture background = new Picture(10, 10, "resources/Game over screen.png");
 
         if (nr_of_keys != 0) {
-            background = new Picture(10, 10, "resources/theEnd.jpeg");
+            background = new Picture(10, 10, "resources/Player wins screen.png");
+        } else {
+            String GameOverAudioFile = "/resources/audio/gameover.wav";
+            new Audio(GameOverAudioFile).play(true);
         }
 
         background.draw();
 
-
-        String GameOverAudioFile = "/resources/audio/gameover.wav";
-        new Audio(GameOverAudioFile).play(true);
 
     }
 
@@ -161,10 +176,14 @@ public class Game {
         if (life_Number != null) {
             life_Number.delete();
         }
-        life_Number = new Text(90, 50, "Keys: " + player.health());
-        life_Number.grow(30, 10);
-        ;
-        life_Number.setColor(Color.WHITE);
-        life_Number.draw();
+
+        if (player.health() == 2) {
+            lifeKey2.delete();
+        } else if (player.health() == 1) {
+            lifeKey1.delete();
+        } else if (player.health() == 0) {
+            lifeKey.delete();
+        }
+
     }
 }

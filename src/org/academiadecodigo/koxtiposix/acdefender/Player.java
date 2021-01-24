@@ -2,17 +2,12 @@ package org.academiadecodigo.koxtiposix.acdefender;
 
 import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.util.ConcurrentModificationException;
-
-import java.util.ConcurrentModificationException;
-
 import java.util.ConcurrentModificationException;
 
 public class Player {
@@ -32,7 +27,6 @@ public class Player {
     }
 
     public void draw() {
-        // playerChar = new Rectangle(Utils.PLAYER_X_POS, Utils.PLAYER_Y_POS, Utils.SIZE, Utils.SIZE);
         playerChar.draw();
     }
     private int x1 = 0;
