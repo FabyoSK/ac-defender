@@ -6,6 +6,8 @@ import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ConcurrentModificationException;
+
 public class Enemy {
 
 

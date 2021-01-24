@@ -21,11 +21,11 @@ public class Player {
     private final Weapon weapon;
     private int health;
     private final int x = 0;
-    String teletransportAudioFile = "/resources/audio/dbz-teleport.wav";
+    private String teletransportAudioFile = "/resources/audio/dbz-teleport.wav";
 
 
     public Player(CollisionDetector detector) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        playerChar = new Picture(10, Utils.PLAYER_Y_POS - 60, "resources/139786701_407714000510361_5265574179140637787_n (3).png");
+        playerChar = new Picture(180, Utils.PLAYER_Y_POS - 60, "resources/Main player.png");
 
         weapon = new Weapon(detector);
         health = 3;

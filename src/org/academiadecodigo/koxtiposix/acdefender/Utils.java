@@ -25,7 +25,7 @@ public class Utils {
 
     /* CLASS ENEMY */
 
-    public static int DEFEND_LINE = 100;
+    public static int DEFEND_LINE = 310;
 
     /*------------*/
 
@@ -41,9 +41,8 @@ public class Utils {
 
     public static int BULLET_LIMIT = 1150;
     public static int BULLET_SPEED = 50;
-    public static int BULLET_X_POS = 165;
-    public static int BULLET_WIDTH = 8;
-    public static int BULLET_HEIGHT = 8;
+    public static int BULLET_X_POS = 350;
+
 
     /*------------*/
 
