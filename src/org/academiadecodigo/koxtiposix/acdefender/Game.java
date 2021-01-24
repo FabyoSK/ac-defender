@@ -10,7 +10,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.util.ConcurrentModificationException;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class Game {
     CollisionDetector collisionDetector;
     Player player;
     Controls controls;
-    Text bulletsCount;
+
     Text life_Number;
     private String BGMAudioFile = "/resources/audio/bgm.wav";
     private String enemySpawnAudioFile = "/resources/audio/enemydead.wav";
@@ -31,22 +31,17 @@ public class Game {
     }
 
     public void boot() {
-        Rectangle bootScreen = new Rectangle(Utils.PADDING, Utils.PADDING, 1200, 700);
+        Picture bootScreen = new Picture(Utils.PADDING, Utils.PADDING, "resources/loading screen.png");
         bootScreen.draw();
-        bootScreen.fill();
+
     }
 
     public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         Picture header = new Picture(10, 10,"resources/Game header.png");
         header.draw();
 
-        Picture background = new Picture(Utils.PADDING, Utils.PADDING * 10, "resources/Game background.png");
+        Picture background = new Picture(Utils.PADDING,110 , "resources/Game background.png");
         background.draw();
-
-        Line line1 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
-        line1.draw();
-        Line line2 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
-        line2.draw();
 
 
         controls = new Controls();
@@ -70,7 +65,6 @@ public class Game {
         while (player.health() > 0) {
 
             while (true) {
-                bulletsHud();
                 lifeHud();
                 if (x % 5 == 0 && x < 1000) {
 
@@ -123,7 +117,7 @@ public class Game {
             enemies.removeAll(enemies);
         }
 
-        Picture background = new Picture(10, 10, "resources/gameover.png");
+        Picture background = new Picture(10, 10, "resources/Game over screen.png");
         background.draw();
 
         String GameOverAudioFile = "/resources/audio/gameover.wav";
@@ -131,28 +125,12 @@ public class Game {
 
     }
 
-    private void bulletsHud() {
-        if (bulletsCount != null) {
-            try {
-                bulletsCount.delete();
-
-            }catch (ConcurrentModificationException e){
-                e.getMessage();
-            }
-
-        }
-        bulletsCount = new Text(100, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
-        bulletsCount.grow(20, 10);
-        bulletsCount.setColor(Color.WHITE);
-        bulletsCount.draw();
-    }
-
-   public void lifeHud() {
+    public void lifeHud() {
         if (life_Number != null) {
             life_Number.delete();
         }
-        life_Number = new Text(200, 50, "KEY: " + player.health());
-        life_Number.grow(20, 10);;
+        life_Number = new Text(90, 50, "Keys: " + player.health());
+        life_Number.grow(30, 10);;
         life_Number.setColor(Color.WHITE);
         life_Number.draw();
     }
