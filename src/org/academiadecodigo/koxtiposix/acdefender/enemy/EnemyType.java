@@ -5,10 +5,10 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public enum EnemyType {
-    LACKEY(2, 4, "resources/Screen_Shot_2021-01-20_at_16.43.20-removebg-preview (2).png"),
-    MIDDLE_BOSS(5, 3, "resources/Screen_Shot_2021-01-20_at_16.43.20-removebg-preview (2).png"),
-    FINAL_BOSS(7, 2, "resources/soldier2 (1).png"),
-    PCM(10, 1, "resources/soldier2 (1).png");
+    LACKEY(2, 4, "resources/Game enemy 1.png"),
+    MIDDLE_BOSS(5, 3, "resources/Game enemy 1.png"),
+    FINAL_BOSS(7, 2, "resources/Game enemy 2.png"),
+    PCM(10, 1, "resources/Game enemy 2.png");
 
     private final int ROAD_ONE = 194;
     private final int ROAD_TWO = 394;

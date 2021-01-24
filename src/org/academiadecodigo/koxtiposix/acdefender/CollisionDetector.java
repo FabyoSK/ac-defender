@@ -4,6 +4,7 @@ package org.academiadecodigo.koxtiposix.acdefender;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.weapons.Bullet;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -22,7 +23,7 @@ public class CollisionDetector {
         this.bullets = bullets;
     }
 
-    public Boolean checkCollision(Ellipse bullet){
+    public Boolean checkCollision(Picture bullet){
 
         for(int i = 0; i < enemies.size(); i++) {
 

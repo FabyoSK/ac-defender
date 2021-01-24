@@ -30,18 +30,15 @@ public class Game {
     }
 
     public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
-        Picture background = new Picture(Utils.PADDING, Utils.PADDING, "resources/battlefield-1-jogo-destruicao-guerra-papel-de-parede-2560x1600-16528_7 (1).jpg");
-        background.draw();
-
-        Picture header = new Picture(10, 10,"resources/ac defender.png");
+        Picture header = new Picture(10, 10,"resources/Game header.png");
         header.draw();
 
+        Picture background = new Picture(Utils.PADDING, Utils.PADDING * 10, "resources/Game background.png");
+        background.draw();
 
-        Line line1 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE1_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE1_Y_POS);
-        line1.draw();
-        Line line2 = new Line(Utils.PADDING + 10, Utils.ROAD_LINE2_Y_POS, Utils.GAME_WIDTH, Utils.ROAD_LINE2_Y_POS);
-        line2.draw();
+        //Picture Tree = new Picture(400, 350, "resources/arvore-removebg-preview.png");
+        //Tree.draw();
+
 
         player = new Player(collisionDetector);
         player.draw();
@@ -60,7 +57,6 @@ public class Game {
                 bulletsHud();
                 lifeHud();
                 if (x % 5 == 0 && x < 1000) {
-
                     enemies.add(new Enemy(EnemyType.values()[(int) (Math.random() * EnemyType.values().length)]));
 
                 }
@@ -111,7 +107,7 @@ public class Game {
             enemies.removeAll(enemies);
         }
 
-        Picture background = new Picture(10, 10,"resources/gameover.png");
+        Picture background = new Picture(10, 10,"resources/Game over screen.png");
         background.draw();
     }
 
@@ -119,17 +115,21 @@ public class Game {
         if (bulletsCount != null) {
             bulletsCount.delete();
         }
-        bulletsCount = new Text(50, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
+        bulletsCount = new Text(100, 50, player.getShotsMade() + "/" + Player.getMaxShoots());
+        bulletsCount.grow(20, 10);
         bulletsCount.setColor(Color.WHITE);
         bulletsCount.draw();
     }
 
-    public void lifeHud() {
+   public void lifeHud() {
         if (life_Number != null) {
             life_Number.delete();
         }
-        life_Number = new Text(150, 50, "key: " + player.health());
+        life_Number = new Text(200, 50, "KEY: " + player.health());
+        life_Number.grow(20, 10);;
         life_Number.setColor(Color.WHITE);
         life_Number.draw();
     }
-}
+
+   }
+
