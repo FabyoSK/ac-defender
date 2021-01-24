@@ -54,7 +54,7 @@ public class Player {
         }x2 = 0;
         System.out.println(x2);
         System.out.println("--" + x1);
-        new Audio(teletransportAudioFile).play();
+        new Audio(teletransportAudioFile).play(true);
     }
 
     public void moveDown() {
@@ -67,15 +67,9 @@ public class Player {
 
         }x2 = 0;
         System.out.println(x2);
-        try {
-            new Audio(teletransportAudioFile).play();
-        } catch (LineUnavailableException e){
-            e.getMessage();
-        } catch (IOException e){
-            e.getMessage();
-        }catch (UnsupportedAudioFileException e){
-            e.getMessage();
-        }
+
+            new Audio(teletransportAudioFile).play(true);
+
 
     }
 

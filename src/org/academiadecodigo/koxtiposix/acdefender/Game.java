@@ -77,8 +77,8 @@ public class Game {
 
     public void start() throws InterruptedException, IOException, LineUnavailableException, UnsupportedAudioFileException {
 
-        new Audio(enemySpawnAudioFile).play();
-        BGM.play();
+        new Audio(enemySpawnAudioFile).play(true);
+        BGM.play(true);
         int x = 0;
 
 
@@ -164,15 +164,9 @@ public class Game {
             background = new Picture(10, 10, "resources/Player wins screen.png");
         } else {
             String GameOverAudioFile = "/resources/audio/gameover.wav";
-            try {
-                new Audio(GameOverAudioFile).play();
-            } catch (LineUnavailableException e){
-                e.getMessage();
-            } catch (IOException e){
-                e.getMessage();
-            }catch (UnsupportedAudioFileException e){
-                e.getMessage();
-            }
+
+                new Audio(GameOverAudioFile).play(true);
+
 
         }
 

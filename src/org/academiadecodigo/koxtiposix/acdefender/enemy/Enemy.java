@@ -75,15 +75,9 @@ public class Enemy {
             dead = true;
             hp = 0;
             Game.enemyDeads++;
-            try {
-                new Audio(enemyDeadAudioFile).play();
-            } catch (LineUnavailableException e){
-                e.getMessage();
-            } catch (IOException e){
-                e.getMessage();
-            }catch (UnsupportedAudioFileException e){
-                e.getMessage();
-            }
+
+                new Audio(enemyDeadAudioFile).play(true);
+
 
             enemyChar.delete();
 
