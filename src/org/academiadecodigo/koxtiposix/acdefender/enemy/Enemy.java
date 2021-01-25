@@ -3,13 +3,7 @@ package org.academiadecodigo.koxtiposix.acdefender.enemy;
 import org.academiadecodigo.koxtiposix.acdefender.Game;
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
 import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
-import java.util.ConcurrentModificationException;
 
 public class Enemy {
 
@@ -36,7 +30,6 @@ public class Enemy {
         this.line_crossed = false;
 
     }
-
 
 
     public void move(Enemy enemy) {
@@ -76,7 +69,7 @@ public class Enemy {
             hp = 0;
             Game.enemyDeads++;
 
-                new Audio(enemyDeadAudioFile).play(true);
+            new Audio(enemyDeadAudioFile).play(true);
 
 
             enemyChar.delete();

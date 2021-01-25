@@ -2,7 +2,6 @@ package org.academiadecodigo.koxtiposix.acdefender;
 
 import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.koxtiposix.acdefender.weapons.Weapon;
-
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -29,6 +28,7 @@ public class Player {
     public void draw() {
         playerChar.draw();
     }
+
     private int x1 = 0;
     private int x2 = 0;
 
@@ -46,14 +46,13 @@ public class Player {
 
     public void moveUp() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
-        x2 ++;
+        x2++;
         if (x2 == 1 && x1 != 1) {
-            playerChar.translate(0 , -Utils.JUMP_SIZE);
+            playerChar.translate(0, -Utils.JUMP_SIZE);
 
-            x1 ++;
-        }x2 = 0;
-        System.out.println(x2);
-        System.out.println("--" + x1);
+            x1++;
+        }
+        x2 = 0;
         new Audio(teletransportAudioFile).play(true);
     }
 
@@ -65,10 +64,10 @@ public class Player {
 
             x1--;
 
-        }x2 = 0;
-        System.out.println(x2);
+        }
+        x2 = 0;
 
-            new Audio(teletransportAudioFile).play(true);
+        new Audio(teletransportAudioFile).play(true);
 
 
     }

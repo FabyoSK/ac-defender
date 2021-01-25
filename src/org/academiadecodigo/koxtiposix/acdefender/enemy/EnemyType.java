@@ -1,13 +1,11 @@
 package org.academiadecodigo.koxtiposix.acdefender.enemy;
 
 import org.academiadecodigo.koxtiposix.acdefender.Utils;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public enum EnemyType {
-    LACKEY(2, 1, "resources/lacey/lacey_walk_0_1.png",6),
-    MIDDLE_BOSS(5, 3, "resources/dc/dc_walk_0_1.png",15),
-    FINAL_BOSS(7, 2, "resources/boss/tile001.png",14);
+    LACKEY(2, 1, "resources/lacey/lacey_walk_0_1.png", 6),
+    MIDDLE_BOSS(5, 3, "resources/dc/dc_walk_0_1.png", 15),
+    FINAL_BOSS(7, 2, "resources/boss/tile001.png", 14);
     //PCM(10, 1, "resources/soldier2 (1).png");
 
     private final int ROAD_ONE = 194;
@@ -46,7 +44,7 @@ public enum EnemyType {
         int randomRoadPos = (int) Math.floor(Math.random() * 3);
         int chooseRoad;
 
-        switch(randomRoadPos) {
+        switch (randomRoadPos) {
             case 0:
                 chooseRoad = Utils.ROAD_ONE;
                 break;

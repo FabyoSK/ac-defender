@@ -4,7 +4,6 @@ import org.academiadecodigo.koxtiposix.acdefender.audio.Audio;
 import org.academiadecodigo.koxtiposix.acdefender.controls.Controls;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.enemy.EnemyType;
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -128,11 +127,9 @@ public class Game {
                     enemies.removeAll(enemies);
                     player.eraseBullets();
                     Thread.sleep(700);
-                    System.out.println("Player HP: " + player.health());
                     break;
                 }
 
-                System.out.println(enemySpawned + "---" + enemyDeads);
                 x++;
 
                 if (enemySpawned == enemyDeads && enemySpawned != 0 && enemyDeads != 0) {
@@ -167,7 +164,7 @@ public class Game {
         } else {
             String GameOverAudioFile = "/resources/audio/gameover.wav";
 
-                new Audio(GameOverAudioFile).play(true);
+            new Audio(GameOverAudioFile).play(true);
 
 
         }

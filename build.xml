@@ -4,21 +4,21 @@
 
     <!-- Initialize build properties  -->
     <target name="init" description="Initializes properties">
-        <property name="project.name" value="ac-defender" />
-        <property name="src.dir" value="src" />
-        <property name="main.class" value="org.academiadecodigo.koxtiposix.acdefender.Main" />
-        <property name="build.dir" value="build" />
-        <property name="classes.dir" value="${build.dir}/classes" />
-        <property name="libs.dir" value="libs" />
+        <property name="project.name" value="ac-defender"/>
+        <property name="src.dir" value="src"/>
+        <property name="main.class" value="org.academiadecodigo.koxtiposix.acdefender.Main"/>
+        <property name="build.dir" value="build"/>
+        <property name="classes.dir" value="${build.dir}/classes"/>
+        <property name="libs.dir" value="libs"/>
         <property name="resources.dir" value="resources"/>
         <path id="classpath">
-            <fileset dir="${libs.dir}" includes="**/*.jar" />
+            <fileset dir="${libs.dir}" includes="**/*.jar"/>
         </path>
     </target>
 
     <!-- Creates the build directories to hold JAR and Class files -->
     <target name="prepare" description="Creates the build and classes directories" depends="init">
-        <mkdir dir="${classes.dir}" />
+        <mkdir dir="${classes.dir}"/>
     </target>
 
     <!-- Compiles the source code -->
@@ -32,8 +32,8 @@
     <target name="jarfile" description="Archives the code" depends="compile">
         <jar destfile="${build.dir}/${project.name}.jar" basedir="${classes.dir}">
             <manifest>
-                <attribute name="Main-Class" value="${main.class}" />
-                <attribute name="Class-Path" value="${libs.dir} ${resources.dir}" />
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="${libs.dir} ${resources.dir}"/>
             </manifest>
             <zipgroupfileset dir="${libs.dir}" includes="*.jar"/>
             <fileset dir=".">
@@ -44,7 +44,7 @@
 
     <!-- Removes the build directory -->
     <target name="clean" description="Clean up project" depends="init">
-        <delete dir="${build.dir}" />
+        <delete dir="${build.dir}"/>
     </target>
 
 </project>

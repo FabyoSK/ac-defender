@@ -3,7 +3,6 @@ package org.academiadecodigo.koxtiposix.acdefender;
 
 import org.academiadecodigo.koxtiposix.acdefender.enemy.Enemy;
 import org.academiadecodigo.koxtiposix.acdefender.weapons.Bullet;
-import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.Iterator;
@@ -23,14 +22,14 @@ public class CollisionDetector {
         this.bullets = bullets;
     }
 
-    public Boolean checkCollision(Picture bullet){
+    public Boolean checkCollision(Picture bullet) {
 
-        for(int i = 0; i < enemies.size(); i++) {
+        for (int i = 0; i < enemies.size(); i++) {
 
-            if(bullet.getY() > enemies.get(i).getEnemyChar().getY() &&
-               bullet.getY() < enemies.get(i).getEnemyChar().getY() + enemies.get(i).getEnemyChar().getHeight() ) {
+            if (bullet.getY() > enemies.get(i).getEnemyChar().getY() &&
+                    bullet.getY() < enemies.get(i).getEnemyChar().getY() + enemies.get(i).getEnemyChar().getHeight()) {
 
-                if(bullet.getX() + bullet.getWidth()  >= enemies.get(i).getEnemyChar().getX()) {
+                if (bullet.getX() + bullet.getWidth() >= enemies.get(i).getEnemyChar().getX()) {
                     //System.out.println("Shoot");
                     enemies.get(i).suffer();
                     return true;
@@ -43,7 +42,7 @@ public class CollisionDetector {
         Iterator<Enemy> iterator = enemies.iterator();
 
         while (iterator.hasNext()) {
-            if(iterator.next().isDead()) {
+            if (iterator.next().isDead()) {
                 iterator.remove();
             }
         }
