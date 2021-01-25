@@ -158,9 +158,11 @@ public class Game {
             enemies.removeAll(enemies);
         }
 
-        Picture background = new Picture(10, 10, "resources/Game over screen.png");
+        Picture background = new Picture(10, 10, "resources/Screen Shot 2021-01-24 at 21.16.33 (1).png");
 
         if (nr_of_keys != 0) {
+            enemies.removeAll(enemies);
+            player.eraseBullets();
             background = new Picture(10, 10, "resources/Player wins screen.png");
         } else {
             String GameOverAudioFile = "/resources/audio/gameover.wav";
