@@ -12,6 +12,10 @@ Help the Katxupi protect the AC from the terrible monsters
 
 - Java (1.8)
 
+## Release
+
+[Click Here](https://github.com/FabyoSK/ac-defender/releases/tag/v1.0) to check the releases
+
 ## Authors
 
 * **Fábio Alves** - [FabyoSK](https://github.com/FabyoSK)
